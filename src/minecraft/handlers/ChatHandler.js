@@ -18,7 +18,7 @@ class StateHandler extends EventHandler {
       return
     }
 
-    this.bot.chat('A message was received')
+    this.minecraft.broadcastMessage({ username, message })
   }
 
   isMessageFromBot(username) {

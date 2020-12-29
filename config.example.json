@@ -6,5 +6,9 @@
   "minecraft": {
     "username": "yourUsername",
     "password": "yourPassword"
+  },
+  "discord": {
+    "token": "discordBotToken",
+    "channel": "channelId"
   }
 }
