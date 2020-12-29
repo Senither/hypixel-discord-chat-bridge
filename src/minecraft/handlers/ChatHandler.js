@@ -22,7 +22,17 @@ class StateHandler extends EventHandler {
       return this.bot.chat('/limbo')
     }
 
-    this.minecraft.broadcastMessage({ username, message })
+    if (! this.isGuildMessage(message)) {
+      return
+    }
+
+    let parts = message.split(':')
+    parts.shift()
+
+    this.minecraft.broadcastMessage({
+      username: username,
+      message: parts.join(':').trim()
+    })
   }
 
   isMessageFromBot(username) {
@@ -32,6 +42,11 @@ class StateHandler extends EventHandler {
   isLobbyJoinMessage(message) {
     return message.endsWith(' the lobby!')
         && message.includes('[MVP+')
+  }
+
+  isGuildMessage(message) {
+    return message.startsWith('Guild >')
+        && message.includes(':')
   }
 }
 
