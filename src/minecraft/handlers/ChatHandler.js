@@ -18,11 +18,20 @@ class StateHandler extends EventHandler {
       return
     }
 
+    if (this.isLobbyJoinMessage(message)) {
+      return this.bot.chat('/limbo')
+    }
+
     this.minecraft.broadcastMessage({ username, message })
   }
 
   isMessageFromBot(username) {
     return this.bot.username === username
+  }
+
+  isLobbyJoinMessage(message) {
+    return message.endsWith(' the lobby!')
+        && message.includes('[MVP+')
   }
 }
 
