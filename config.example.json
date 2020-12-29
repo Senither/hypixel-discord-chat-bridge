@@ -1,1 +1,10 @@
-{}
+{
+  "server": {
+    "host": "localhost",
+    "port": 25565
+  },
+  "minecraft": {
+    "username": "yourUsername",
+    "password": "yourPassword"
+  }
+}
