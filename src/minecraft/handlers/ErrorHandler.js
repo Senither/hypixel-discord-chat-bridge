@@ -12,12 +12,21 @@ class StateHandler extends EventHandler {
       return
     }
 
+    if (this.isConnectionRefusedError(error)) {
+      return console.error('Connection refused while attempting to login via the Minecraft client')
+    }
+
     console.error('Minecraft Bot Error: ', error)
   }
 
   isConnectionResetError(error) {
     return error.hasOwnProperty('code')
         && error.code == 'ECONNRESET'
+  }
+
+  isConnectionRefusedError(error) {
+    return error.hasOwnProperty('code')
+        && error.code == 'ECONNREFUSED'
   }
 }
 

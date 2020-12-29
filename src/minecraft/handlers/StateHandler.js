@@ -17,11 +17,13 @@ class StateHandler extends EventHandler {
   }
 
   onLogin() {
+    console.log('Minecraft client ready')
+
     this.loginAttempts = 0
   }
 
   onEnd() {
-    let loginDelay = this.loginAttempts * 5000
+    let loginDelay = (this.loginAttempts + 1) * 5000
 
     if (loginDelay > 60000) {
       loginDelay = 60000
