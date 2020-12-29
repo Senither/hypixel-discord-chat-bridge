@@ -1,0 +1,29 @@
+{
+  "name": "hypixel-discord-chat-bridge",
+  "version": "0.0.1",
+  "description": "A Hypixel guild chat and Discord chat bridge",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Senither/hypixel-discord-chat-bridge.git"
+  },
+  "keywords": [
+    "hypixel",
+    "discord",
+    "chat",
+    "bridge"
+  ],
+  "author": "Alexis Tan (alexis@senither.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Senither/hypixel-discord-chat-bridge/issues"
+  },
+  "homepage": "https://github.com/Senither/hypixel-discord-chat-bridge#readme",
+  "dependencies": {
+    "discord.js-light": "^3.5.0",
+    "mineflayer": "^2.39.2"
+  }
+}
