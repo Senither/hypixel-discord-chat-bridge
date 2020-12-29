@@ -10,15 +10,15 @@ class StateHandler extends EventHandler {
   registerEvents(bot) {
     this.bot = bot
 
-    this.bot.on('chat', (...args) => this.onMessage(...args))
+    this.bot.on('message', (...args) => this.onMessage(...args))
   }
 
-  onMessage(username, message) {
-    if (this.isMessageFromBot(username)) {
-      return
-    }
+  onMessage(event) {
+    const message = event.toString().trim()
 
     if (this.isLobbyJoinMessage(message)) {
+      console.log('Sending Minecraft client to limbo')
+
       return this.bot.chat('/limbo')
     }
 
@@ -27,10 +27,20 @@ class StateHandler extends EventHandler {
     }
 
     let parts = message.split(':')
-    parts.shift()
+    let group = parts.shift().trim()
+    let hasRank = group.endsWith(']')
+
+    let userParts = group.split(' ')
+    let username = userParts[
+      userParts.length - (hasRank ? 2 : 1)
+    ]
+
+    if (this.isMessageFromBot(username)) {
+      return
+    }
 
     this.minecraft.broadcastMessage({
-      username: username,
+      username: userParts[userParts.length - (group.endsWith(']') ? 2 : 1)],
       message: parts.join(':').trim()
     })
   }
@@ -40,8 +50,10 @@ class StateHandler extends EventHandler {
   }
 
   isLobbyJoinMessage(message) {
-    return message.endsWith(' the lobby!')
-        && message.includes('[MVP+')
+    return (
+        message.endsWith(' the lobby!')
+     || message.endsWith(' the lobby! <<<')
+    ) && message.includes('[MVP+')
   }
 
   isGuildMessage(message) {
