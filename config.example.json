@@ -1,6 +1,6 @@
 {
   "server": {
-    "host": "localhost",
+    "host": "mc.hypixel.net",
     "port": 25565
   },
   "minecraft": {
