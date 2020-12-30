@@ -16,4 +16,4 @@ class Application {
   }
 }
 
-module.exports = new Application;
+module.exports = new Application

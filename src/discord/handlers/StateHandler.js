@@ -8,5 +8,4 @@ class StateHandler {
   }
 }
 
-
 module.exports = StateHandler

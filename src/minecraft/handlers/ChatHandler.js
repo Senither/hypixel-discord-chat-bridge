@@ -40,7 +40,7 @@ class StateHandler extends EventHandler {
     }
 
     this.minecraft.broadcastMessage({
-      username: userParts[userParts.length - (group.endsWith(']') ? 2 : 1)],
+      username: username,
       message: parts.join(':').trim()
     })
   }
