@@ -1,5 +1,4 @@
-class CommunicationBridge
-{
+class CommunicationBridge {
   constructor() {
     this.bridge = null
   }

@@ -1,9 +1,7 @@
 Hypixel Discord Chat Bridge
 ===========================
 
-A two way chat bridge between [Hypixel](https://hypixel.net/) guild chat, and [Discord](https://discord.com/) channels.
-
-The application utilizes [Discord.js-light](https://github.com/timotejroiko/discord.js-light) for communicating with Discord, and [Mineflayer](https://github.com/PrismarineJS/mineflayer) for communicating with Hypixel.
+A two way chat bridge between [Hypixel](https://hypixel.net/) guild chat and [Discord](https://discord.com/) channels. The application utilizes [Discord.js-light](https://github.com/timotejroiko/discord.js-light) for communicating with Discord, and [Mineflayer](https://github.com/PrismarineJS/mineflayer) for communicating with Hypixel.
 
 > This application will login to Hypixel using Mineflayer which is not a normal Minecraft client, this could result in your Minecraft account getting banned from Hypixel, so use this application at your own risk.
 
@@ -12,7 +10,7 @@ The application utilizes [Discord.js-light](https://github.com/timotejroiko/disc
 ## Table of Content
 
  - [Prerequisites](#prerequisites)
- - [Installation & Setup](#installation-setup)
+ - [Installation & Setup](#installation--setup)
  - [Configuration](#configuration)
  - [Roadmap](#roadmap)
 
