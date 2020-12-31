@@ -12,7 +12,7 @@ class MessageHandler {
 
     this.discord.broadcastMessage({
       username: message.member.displayName,
-      message: message.content
+      message: message.content.split('\n').join(' '),
     })
   }
 
