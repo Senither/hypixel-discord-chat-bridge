@@ -34,6 +34,8 @@ class MinecraftManager extends CommunicationBridge {
   }
 
   onBroadcast({ username, message }) {
+    console.log(`Minecraft Broadcast > ${username}: ${message}`)
+
     if (this.bot.player !== undefined) {
       this.bot.chat(`/gc ${username}: ${message}`)
     }

@@ -28,6 +28,8 @@ class DiscordManager extends CommunicationBridge {
 
   onBroadcast({ username, message }) {
     this.client.channels.fetch(config.discord.channel).then(channel => {
+      console.log(`Discord Broadcast > ${username}: ${message}`)
+
       channel.send({
         embed: {
           description: message,
