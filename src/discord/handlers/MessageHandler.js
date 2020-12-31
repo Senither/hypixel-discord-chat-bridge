@@ -10,6 +10,11 @@ class MessageHandler {
       return
     }
 
+    const content = this.stripDiscordContent(message.content).trim()
+    if (content.length == 0) {
+      return
+    }
+
     this.discord.broadcastMessage({
       username: message.member.displayName,
       message: this.stripDiscordContent(message.content),
