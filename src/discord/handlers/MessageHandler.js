@@ -1,12 +1,17 @@
 const config = require('../../../config.json')
 
 class MessageHandler {
-  constructor(discord) {
+  constructor(discord, command) {
     this.discord = discord
+    this.command = command
   }
 
   onMessage(message) {
     if (!this.shouldBroadcastMessage(message)) {
+      return
+    }
+
+    if (this.command.handle(message)) {
       return
     }
 

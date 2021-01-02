@@ -3,8 +3,8 @@ const MinecraftManager = require('./minecraft/MinecraftManager')
 
 class Application {
   async register() {
-    this.discord = new DiscordManager
-    this.minecraft = new MinecraftManager
+    this.discord = new DiscordManager(this)
+    this.minecraft = new MinecraftManager(this)
 
     this.discord.setBridge(this.minecraft)
     this.minecraft.setBridge(this.discord)
@@ -16,4 +16,4 @@ class Application {
   }
 }
 
-module.exports = new Application
+module.exports = new Application()

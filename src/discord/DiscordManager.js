@@ -2,20 +2,27 @@ const config = require('../../config.json')
 const CommunicationBridge = require('../contracts/CommunicationBridge')
 const StateHandler = require('./handlers/StateHandler')
 const MessageHandler = require('./handlers/MessageHandler')
+const CommandHandler = require('./commands/CommandHandler')
 const Discord = require('discord.js-light')
 
 class DiscordManager extends CommunicationBridge {
-  connect() {
-    this.stateHandler = new StateHandler(this)
-    this.messageHandler = new MessageHandler(this)
+  constructor(app) {
+    super()
 
+    this.app = app
+
+    this.stateHandler = new StateHandler(this)
+    this.messageHandler = new MessageHandler(this, new CommandHandler(this))
+  }
+
+  connect() {
     this.client = new Discord.Client({
       cacheGuilds: true,
       cacheChannels: true,
       cacheOverwrites: false,
       cacheRoles: false,
       cacheEmojis: false,
-      cachePresences: false
+      cachePresences: false,
     })
 
     this.client.on('ready', () => this.stateHandler.onReady())
@@ -34,15 +41,15 @@ class DiscordManager extends CommunicationBridge {
         embed: {
           description: message,
           color: 8311585,
-          timestamp: new Date,
+          timestamp: new Date(),
           footer: {
-            text: 'Message was sent'
+            text: 'Message was sent',
           },
           author: {
             name: username,
-            icon_url: 'https://www.mc-heads.net/avatar/' + username
-          }
-        }
+            icon_url: 'https://www.mc-heads.net/avatar/' + username,
+          },
+        },
       })
     })
   }
