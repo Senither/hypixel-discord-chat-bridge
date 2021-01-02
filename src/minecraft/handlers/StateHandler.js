@@ -17,7 +17,7 @@ class StateHandler extends EventHandler {
   }
 
   onLogin() {
-    console.log('Minecraft client ready')
+    console.log('Minecraft client ready, logged in as ' + this.bot.username)
 
     this.loginAttempts = 0
   }

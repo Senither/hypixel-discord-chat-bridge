@@ -4,7 +4,7 @@ class StateHandler {
   }
 
   onReady() {
-    console.log('Discord client ready')
+    console.log('Discord client ready, logged in as ' + this.discord.client.user.tag)
   }
 }
 
