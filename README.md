@@ -1,7 +1,7 @@
 Hypixel Discord Chat Bridge
 ===========================
 
-A two way chat bridge between [Hypixel](https://hypixel.net/) guild chat and [Discord](https://discord.com/) channels. The application utilizes [Discord.js-light](https://github.com/timotejroiko/discord.js-light) for communicating with Discord, and [Mineflayer](https://github.com/PrismarineJS/mineflayer) for communicating with Hypixel.
+A two-way chat bridge between [Hypixel](https://hypixel.net/) guild chat and a [Discord](https://discord.com/) channel. The application utilizes [Discord.js-light](https://github.com/timotejroiko/discord.js-light) for communicating with Discord, and [Mineflayer](https://github.com/PrismarineJS/mineflayer) for communicating with Hypixel.
 
 > This application will login to Hypixel using Mineflayer which is not a normal Minecraft client, this could result in your Minecraft account getting banned from Hypixel, so use this application at your own risk.
 
@@ -54,11 +54,13 @@ The minecraft section includes a `username` and `password` option, these should 
 
 #### Discord
 
-The Discord options includes the `token` and `channel` options.
+The Discord options includes the `token`, `channel`, `commandRole` options.
 
 The token is the Discord application token, if you don't already have a Discord App, you can [create a new app](https://discordapp.com/developers), then convert the app to a Discord bot, and then get your Discord bot token on the "Bot" page.
 
 The Discord channel is the ID of the text channel the bot should be linked with, the bot will only send and listen to messages in the channel defined in the config.
+
+The command role is the ID of any role on the server the bot is hosted for, any user with the role will be able to run all the Discord commands built into the bot, like `!help` and `!relog`.
 
 ### Roadmap
 
