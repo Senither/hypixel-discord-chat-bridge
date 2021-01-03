@@ -1,5 +1,6 @@
 const config = require('../../../config.json')
 const RelogCommand = require('./RelogCommand')
+const HelpCommand = require('./HelpCommand')
 
 class CommandHandler {
   constructor(discord) {
@@ -7,6 +8,10 @@ class CommandHandler {
       {
         trigger: ['!relog', '!r'],
         handler: new RelogCommand(discord),
+      },
+      {
+        trigger: ['!help', '!h'],
+        handler: new HelpCommand(discord),
       },
     ]
   }
