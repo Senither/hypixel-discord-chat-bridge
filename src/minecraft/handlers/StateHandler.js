@@ -4,8 +4,9 @@ class StateHandler extends EventHandler {
   constructor(minecraft) {
     super()
 
-    this.loginAttempts = 0
     this.minecraft = minecraft
+    this.loginAttempts = 0
+    this.exactDelay = 0
   }
 
   registerEvents(bot) {
@@ -20,13 +21,17 @@ class StateHandler extends EventHandler {
     console.log('Minecraft client ready, logged in as ' + this.bot.username)
 
     this.loginAttempts = 0
+    this.exactDelay = 0
   }
 
   onEnd() {
-    let loginDelay = (this.loginAttempts + 1) * 5000
+    let loginDelay = this.exactDelay
+    if (loginDelay == 0) {
+      loginDelay = (this.loginAttempts + 1) * 5000
 
-    if (loginDelay > 60000) {
-      loginDelay = 60000
+      if (loginDelay > 60000) {
+        loginDelay = 60000
+      }
     }
 
     console.log(`Minecraft bot disconnected from server, attempting reconnect in ${loginDelay / 1000} seconds`)
