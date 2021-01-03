@@ -41,7 +41,8 @@ class StateHandler extends EventHandler {
 
     this.minecraft.broadcastMessage({
       username: username,
-      message: parts.join(':').trim()
+      message: parts.join(':').trim(),
+      type: 'message',
     })
   }
 

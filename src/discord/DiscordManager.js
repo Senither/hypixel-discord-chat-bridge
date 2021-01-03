@@ -33,24 +33,34 @@ class DiscordManager extends CommunicationBridge {
     })
   }
 
-  onBroadcast({ username, message }) {
+  onBroadcast({ username, message, type }) {
     this.client.channels.fetch(config.discord.channel).then(channel => {
-      console.log(`Discord Broadcast > ${username}: ${message}`)
+      let embed = null
 
-      channel.send({
-        embed: {
-          description: message,
-          color: 8311585,
-          timestamp: new Date(),
-          footer: {
-            text: 'Message was sent',
-          },
-          author: {
-            name: username,
-            icon_url: 'https://www.mc-heads.net/avatar/' + username,
-          },
-        },
-      })
+      switch (type) {
+        case 'message':
+          console.log(`Discord Broadcast > ${username}: ${message}`)
+
+          embed = {
+            embed: {
+              description: message,
+              color: 8311585,
+              timestamp: new Date(),
+              footer: {
+                text: 'Message was sent',
+              },
+              author: {
+                name: username,
+                icon_url: 'https://www.mc-heads.net/avatar/' + username,
+              },
+            },
+          }
+          break
+      }
+
+      if (embed !== null) {
+        channel.send(embed)
+      }
     })
   }
 }
