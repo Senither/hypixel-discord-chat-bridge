@@ -24,37 +24,31 @@ class StateHandler extends EventHandler {
 
     if (! this.isGuildMessage(message)) {
 
-      let param = null
+      let state = null
+      let username = null
 
       if (this.isGuildLogMessage(message)) {
         // Format: [rank] [player] ____ the guild!
         let parts = message.split(' ')
-        let state = parts[parts.length - 3]
-        let username = parts[parts.length - 4]
-
-        param = {
-          username: username,
-          message: state,
-        }
+        state = parts[parts.length - 3]
+        username = parts[parts.length - 4]
       }
 
       else if(this.isGuildKickMessage(message)) {
         // Format: [rank] [player] was kicked from the guild by [rank] [player]!"
         let parts = message.split(' was kicked ')
-        let state = 'kicked'
+        state = 'kicked'
 
         let userParts = parts.shift().split(' ')
-        let username = userParts[userParts.length - 1]
-
-        param = {
-          username: username,
-          message: state,
-        }
+        username = userParts[userParts.length - 1]
       }
 
-      if (param !== null) {
-        param['type'] = 'guildLog'
-        this.minecraft.broadcastMessage(param)
+      if (state !== null) {
+        this.minecraft.broadcastMessage({
+          username: username,
+          message: state,
+          type: 'guildLog'
+        })
       }
 
       return
