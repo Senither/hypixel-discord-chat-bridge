@@ -56,6 +56,14 @@ class DiscordManager extends CommunicationBridge {
             },
           }
           break
+
+        case 'network':
+          // TODO your discretion
+          break
+
+        case 'guildLog':
+          // TODO your discretion
+          break
       }
 
       if (embed !== null) {

@@ -23,11 +23,63 @@ class StateHandler extends EventHandler {
     }
 
     if (! this.isGuildMessage(message)) {
+
+      let param = null
+
+      if (this.isGuildLogMessage(message)) {
+        // Format: 
+        let parts = message.split(' ')
+        let state = parts[parts.length - 3]
+        let username = parts[parts.length - 4]
+
+        param = {
+          username: username,
+          message: state,
+        }
+      }
+
+      else if(this.isGuildKickMessage(message)) {
+        let parts = message.split(' was kicked ')
+        let state = 'kicked'
+
+        let userParts = parts.shift().split(' ')
+        let username = userParts[userParts.length - 1]
+
+        param = {
+          username: username,
+          message: state,
+        }
+      }
+
+      if (param !== null) {
+        param['type'] = 'guildLog'
+        this.minecraft.broadcastMessage(param)
+      }
+
       return
     }
 
-    let parts = message.split(':')
-    let group = parts.shift().trim()
+    // Message has "Guild >"
+
+    if (!this.isChatMessage(message) &&
+        this.isNetworkMessage(message)) {
+
+      // Format: "Guild > [player] ___."
+      let parts = message.split(' ')
+      let state = parts[parts.length - 1].slice(0, -1)
+      let username = parts[parts.length - 2]
+
+      this.minecraft.broadcastMessage({
+        username: username,
+        message: state,
+        type: 'network'
+      })
+
+      return
+    }
+
+    let parts = message.split(':')    // ["Guild > [rank] [player] [X]", "content", ...]
+    let group = parts.shift().trim()  // "Guild > [rank] [player] [X]", ["content", ...]
     let hasRank = group.endsWith(']')
 
     let userParts = group.split(' ')
@@ -59,7 +111,33 @@ class StateHandler extends EventHandler {
 
   isGuildMessage(message) {
     return message.startsWith('Guild >')
-        && message.includes(':')
+  }
+
+  isChatMessage(message) {
+    return message.includes(':')
+  }
+
+  // Guild join and leave messages
+  // [rank] [player] joined the guild!
+  // [rank] [player] left the guild!
+  // [rank] [player] was kicked from the guild by [rank] [player]!
+
+  isGuildLogMessage(message) {
+    return message.endsWith('joined the guild!')
+        || message.endsWith('left the guild!')
+  }
+
+  isGuildKickMessage(message) {
+    return message.includes('was kicked from the guild by')
+  }
+
+  // Network join and leave messages
+  // Guild > [player] joined.
+  // Guild > [player] left.
+
+  isNetworkMessage(message){
+    return message.endsWith('joined.')
+        || message.endsWith('left.')
   }
 }
 
