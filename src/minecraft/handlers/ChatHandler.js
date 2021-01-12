@@ -27,7 +27,7 @@ class StateHandler extends EventHandler {
       let param = null
 
       if (this.isGuildLogMessage(message)) {
-        // Format: 
+        // Format: [rank] [player] ____ the guild!
         let parts = message.split(' ')
         let state = parts[parts.length - 3]
         let username = parts[parts.length - 4]
@@ -39,6 +39,7 @@ class StateHandler extends EventHandler {
       }
 
       else if(this.isGuildKickMessage(message)) {
+        // Format: [rank] [player] was kicked from the guild by [rank] [player]!"
         let parts = message.split(' was kicked ')
         let state = 'kicked'
 
@@ -59,12 +60,12 @@ class StateHandler extends EventHandler {
       return
     }
 
-    // Message has "Guild >"
+    // Verified that message has "Guild >"
 
     if (!this.isChatMessage(message) &&
         this.isNetworkMessage(message)) {
 
-      // Format: "Guild > [player] ___."
+      // Format: Guild > [player] ___.
       let parts = message.split(' ')
       let state = parts[parts.length - 1].slice(0, -1)
       let username = parts[parts.length - 2]
@@ -78,8 +79,8 @@ class StateHandler extends EventHandler {
       return
     }
 
-    let parts = message.split(':')    // ["Guild > [rank] [player] [X]", "content", ...]
-    let group = parts.shift().trim()  // "Guild > [rank] [player] [X]", ["content", ...]
+    let parts = message.split(':')
+    let group = parts.shift().trim()
     let hasRank = group.endsWith(']')
 
     let userParts = group.split(' ')
