@@ -37,7 +37,7 @@ class CommandHandler {
       return message.reply("You're not allowed to run this command!")
     }
 
-    console.log(`Command Handler > [${command.handler.constructor.name}] ${message.content}`)
+    console.log(`Discord Command Handler > [${command.handler.constructor.name}] ${message.content}`)
 
     command.handler.onCommand(message)
   }

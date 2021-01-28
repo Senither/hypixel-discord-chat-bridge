@@ -1,6 +1,6 @@
-const Command = require('../../contracts/Command')
+const DiscordCommand = require('../../contracts/DiscordCommand')
 
-class RelogCommand extends Command {
+class RelogCommand extends DiscordCommand {
   onCommand(message) {
     let args = this.getArgs(message)
 

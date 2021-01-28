@@ -1,5 +1,6 @@
 const config = require('../../config.json')
 const CommunicationBridge = require('../contracts/CommunicationBridge')
+const CommandHandler = require('./commands/CommandHandler')
 const StateHandler = require('./handlers/StateHandler')
 const ErrorHandler = require('./handlers/ErrorHandler')
 const ChatHandler = require('./handlers/ChatHandler')
@@ -13,7 +14,7 @@ class MinecraftManager extends CommunicationBridge {
 
     this.stateHandler = new StateHandler(this)
     this.errorHandler = new ErrorHandler(this)
-    this.chatHandler = new ChatHandler(this)
+    this.chatHandler = new ChatHandler(this, new CommandHandler(this))
   }
 
   connect() {

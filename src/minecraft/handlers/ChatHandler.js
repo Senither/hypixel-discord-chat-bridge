@@ -1,10 +1,12 @@
 const EventHandler = require('../../contracts/EventHandler')
+const CommandHandler = require('../commands/CommandHandler')
 
 class StateHandler extends EventHandler {
-  constructor(minecraft) {
+  constructor(minecraft, command) {
     super()
 
     this.minecraft = minecraft
+    this.command = command
   }
 
   registerEvents(bot) {
@@ -37,9 +39,14 @@ class StateHandler extends EventHandler {
       return
     }
 
+    const playerMessage = parts.join(':').trim()
+    if (this.command.handle(username, playerMessage)) {
+      return
+    }
+
     this.minecraft.broadcastMessage({
       username: username,
-      message: parts.join(':').trim(),
+      message: playerMessage,
     })
   }
 

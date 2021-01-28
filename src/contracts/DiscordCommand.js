@@ -1,4 +1,4 @@
-class Command {
+class DiscordCommand {
   constructor(discord) {
     this.discord = discord
   }
@@ -16,4 +16,4 @@ class Command {
   }
 }
 
-module.exports = Command
+module.exports = DiscordCommand

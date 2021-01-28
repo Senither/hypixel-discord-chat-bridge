@@ -1,6 +1,6 @@
-const Command = require('../../contracts/Command')
+const DiscordCommand = require('../../contracts/DiscordCommand')
 
-class HelpCommand extends Command {
+class HelpCommand extends DiscordCommand {
   onCommand(message) {
     message.reply(
       [
