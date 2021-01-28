@@ -17,13 +17,6 @@ class StateHandler extends EventHandler {
 
   onMessage(event) {
     const message = event.toString().trim()
-
-    if (this.isLobbyJoinMessage(message)) {
-      console.log('Sending Minecraft client to limbo')
-
-      return this.bot.chat('/limbo')
-    }
-
     if (!this.isGuildMessage(message)) {
       return
     }
@@ -52,10 +45,6 @@ class StateHandler extends EventHandler {
 
   isMessageFromBot(username) {
     return this.bot.username === username
-  }
-
-  isLobbyJoinMessage(message) {
-    return (message.endsWith(' the lobby!') || message.endsWith(' the lobby! <<<')) && message.includes('[MVP+')
   }
 
   isGuildMessage(message) {
