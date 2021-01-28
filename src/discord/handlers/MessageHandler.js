@@ -41,12 +41,7 @@ class MessageHandler {
   }
 
   shouldBroadcastMessage(message) {
-    return (
-      !message.author.bot &&
-      message.channel.id == config.discord.channel &&
-      message.content &&
-      message.content.length > 0
-    )
+    return !message.author.bot && message.channel.id == config.discord.channel && message.content && message.content.length > 0
   }
 }
 
