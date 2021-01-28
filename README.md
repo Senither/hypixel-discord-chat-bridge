@@ -50,7 +50,7 @@ The server is the server the Minecraft client should connect to, by default it w
 
 #### Minecraft
 
-The minecraft section includes a `username` and `password` option, these should be filled out with your Mojang username and password for the Minecraft account you plan on using, your Minecraft username is most likely the email it was created with.
+The minecraft section includes a `username` and `password` option, these should be filled out with your Mojang username and password for the Minecraft account you plan on using, your Minecraft username is most likely the email it was created with. There is also a `lobbyHolder` option which is used in the `!guildlobby` command, this command will whisper the user specified in the config with a message using the `?tw <username>` format, for this command to do anything another bot needs to listen, and then act when receiving the message. 
 
 #### Discord
 

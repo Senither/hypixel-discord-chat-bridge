@@ -1,4 +1,5 @@
 const PingCommand = require('./PingCommand')
+const GuildLobbyCommand = require('./GuildLobbyCommand')
 
 class CommandHandler {
   constructor(minecraft) {
@@ -6,6 +7,10 @@ class CommandHandler {
       {
         trigger: ['!ping'],
         handler: new PingCommand(minecraft),
+      },
+      {
+        trigger: ['!guildlobby', '!globby'],
+        handler: new GuildLobbyCommand(minecraft),
       },
     ]
   }
