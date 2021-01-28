@@ -32,7 +32,7 @@ class CommandHandler {
   }
 
   runCommand(command, player, message) {
-    console.log(`Minecraft Command Handler > [${command.handler.constructor.name}] ${message}`)
+    console.log(`Minecraft Command Handler > ${player} - [${command.handler.constructor.name}] ${message}`)
 
     command.handler.onCommand(player, message)
   }
