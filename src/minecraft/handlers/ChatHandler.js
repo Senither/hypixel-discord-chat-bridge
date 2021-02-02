@@ -54,10 +54,6 @@ class StateHandler extends EventHandler {
     return this.bot.username === username
   }
 
-  isLobbyJoinMessage(message) {
-    return (message.endsWith(' the lobby!') || message.endsWith(' the lobby! <<<')) && message.includes('[MVP+')
-  }
-
   isGuildMessage(message) {
     return message.startsWith('Guild >') && message.includes(':')
   }
