@@ -1,6 +1,6 @@
 {
   "name": "hypixel-discord-chat-bridge",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "A Hypixel guild chat and Discord chat bridge",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,6 @@
   "homepage": "https://github.com/Senither/hypixel-discord-chat-bridge#readme",
   "dependencies": {
     "discord.js-light": "^3.5.0",
-    "mineflayer": "^2.39.2"
+    "mineflayer": "^3.0.0"
   }
 }
