@@ -6,7 +6,8 @@
   "minecraft": {
     "username": "yourUsername",
     "password": "yourPassword",
-    "lobbyHolder": "ignUsername"
+    "lobbyHolder": "ignUsername",
+    "accountType": "mojang"
   },
   "discord": {
     "token": "discordBotToken",

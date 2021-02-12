@@ -32,7 +32,7 @@ class MinecraftManager extends CommunicationBridge {
       username: config.minecraft.username,
       password: config.minecraft.password,
       version: false,
-      auth: 'mojang',
+      auth: config.minecraft.accountType,
     })
   }
 
