@@ -1,5 +1,5 @@
 'use strict'
-process.title = 'Hypixel Skyblock Leaderboard Generator'
+process.title = 'Hypixel Discord Chat Bridge'
 
 const app = require('./src/Application')
 
