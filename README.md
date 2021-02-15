@@ -62,6 +62,17 @@ The Discord channel is the ID of the text channel the bot should be linked with,
 
 The command role is the ID of any role on the server the bot is hosted for, any user with the role will be able to run all the Discord commands built into the bot, like `!help` and `!relog`.
 
+### Commands
+
+<> = Required arguments, [] Optional arguments
+!help - Displays this command list (!h)
+!relog [delay] - Relogs the MC client, a delay can be given in seconds, if no delay is given it will default to 5 seconds (!r)
+!override <command> [args] - Executes the string attached. This is a dangerous permission to grant (!o, !or)
+!invite <player> - Invites the specified user to the guild, providing the guild isn't full (!i, !inv)
+!kick <user> [reason] - Kicks the specified user from the guild (!k)
+!promote <user> - Promotes the specified user by 1 rank (!p, !up)
+!demote <user> - Demotes the specified user by 1 rank (!d, !down)
+
 ### Roadmap
 
 - [ ] Chat message filter
