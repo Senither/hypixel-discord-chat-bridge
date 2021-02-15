@@ -61,6 +61,10 @@ class StateHandler extends EventHandler {
   isGuildMessage(message) {
     return message.startsWith('Guild >') && message.includes(':')
   }
+
+  isOfficerMessage(message){
+    return message.startsWith('Officer >') && message.includes(':')
+  }
 }
 
 module.exports = StateHandler

@@ -1,6 +1,8 @@
 const config = require('../../../config.json')
 const RelogCommand = require('./RelogCommand')
 const HelpCommand = require('./HelpCommand')
+const InviteCommand = require('./InviteCommand')
+const KickCommand = require('./KickCommand')
 
 class CommandHandler {
   constructor(discord) {
@@ -12,6 +14,14 @@ class CommandHandler {
       {
         trigger: ['!help', '!h'],
         handler: new HelpCommand(discord),
+      },
+      {
+        trigger: ['!invite', '!inv', '!i'],
+        handler: new InviteCommand(discord),
+      },
+      {
+        trigger: ['!kick', '!k'],
+        handler: new KickCommand(discord),
       },
     ]
   }
