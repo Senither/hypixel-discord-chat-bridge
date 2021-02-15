@@ -81,6 +81,10 @@ The command role is the ID of any role on the server the bot is hosted for, any 
   - This can be done by using something like [Winston](https://www.npmjs.com/package/winston), or [chalk](https://www.npmjs.com/package/chalk).
 - [ ] Log guild joins & leaves
   - Send a message in Discord when people join or leave the guild, and when people login or logout of Hypixel.
+- [ ] Add support for officer chat
+  - Allocate a second discord channel to use for two way officer chat.
+- [ ] Add more commands for staff to use
+  - !invite, !kick, !promote, !demote, !ban, !unban
 
 ## License
 
