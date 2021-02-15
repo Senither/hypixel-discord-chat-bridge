@@ -1,6 +1,6 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
 
-class KickCommand extends DiscordCommand {
+class MuteCommand extends DiscordCommand {
   onCommand(message) {
     let args = this.getArgs(message)
 
@@ -19,4 +19,4 @@ class KickCommand extends DiscordCommand {
   }
 }
 
-module.exports = KickCommand
+module.exports = MuteCommand
