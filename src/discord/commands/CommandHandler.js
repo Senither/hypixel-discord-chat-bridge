@@ -42,7 +42,7 @@ class CommandHandler {
       {
         trigger: ['!mute', '!m'],
         handler: new MuteCommand(discord),
-      }
+      },
     ]
   }
 

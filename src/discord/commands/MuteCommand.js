@@ -6,13 +6,11 @@ class MuteCommand extends DiscordCommand {
 
     if (args.length == 0) {
       message.reply(`You need to specify a user to mute`)
-    }
-    else if (args.length == 1){
+    } else if (args.length == 1) {
       message.reply(`You need to give a time to mute for`)
-    }
-    else{
-      let ign = args[0];
-      let time = args.slice(1);
+    } else {
+      let ign = args[0]
+      let time = args.slice(1)
       this.discord.app.minecraft.bot.chat(`/g mute ${ign} ${time}`)
       message.reply(`${ign} has been muted for ${time}`)
     }

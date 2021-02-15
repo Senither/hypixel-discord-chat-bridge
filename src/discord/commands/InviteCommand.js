@@ -6,11 +6,10 @@ class InviteCommand extends DiscordCommand {
 
     if (args.length == 0) {
       message.reply(`You need to specify a user to invite`)
-    }
-    else{
-      let ign = args[0];
+    } else {
+      let ign = args[0]
       this.discord.app.minecraft.bot.chat(`/g invite ${ign}`)
-      message.reply(ign+` has been invited to the guild`)
+      message.reply(ign + ` has been invited to the guild`)
     }
   }
 }
