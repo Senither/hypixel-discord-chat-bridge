@@ -9,7 +9,6 @@ class RelogCommand extends DiscordCommand {
     }
 
     let delay = parseInt(args.pop())
-
     if (isNaN(delay)) {
       return message.reply('Relog delay must be a number between 5 and 300!')
     }

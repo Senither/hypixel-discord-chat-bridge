@@ -5,12 +5,13 @@ class DemoteCommand extends DiscordCommand {
     let args = this.getArgs(message)
 
     if (args.length == 0) {
-      message.reply(`You need to specify a user to demote`)
-    } else {
-      let ign = args[0]
-      this.discord.app.minecraft.bot.chat(`/g demote ${ign}`)
-      message.reply(`${ign} has been demoted`)
+      return message.reply(`You need to specify a user to demote`)
     }
+
+    let username = args[0]
+
+    this.sendMinecraftMessage(`/g demote ${username}`)
+    message.reply(`${username} has been demoted`)
   }
 }
 

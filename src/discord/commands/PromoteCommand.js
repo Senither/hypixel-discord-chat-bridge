@@ -6,11 +6,12 @@ class PromoteCommand extends DiscordCommand {
 
     if (args.length == 0) {
       message.reply(`You need to specify a user to promote`)
-    } else {
-      let ign = args[0]
-      this.discord.app.minecraft.bot.chat(`/g promote ${ign}`)
-      message.reply(`${ign} has been promoted`)
     }
+
+    let username = args[0]
+
+    this.sendMinecraftMessage(`/g promote ${username}`)
+    message.reply(`${username} has been promoted`)
   }
 }
 
