@@ -11,7 +11,7 @@ class KickCommand extends DiscordCommand {
     }
 
     let username = args[0]
-    let reason = args.slice(1)
+    let reason = args.slice(1).join(' ')
 
     this.sendMinecraftMessage(`/g kick ${username} ${reason}`)
     message.reply(`${username} has been kicked from the guild for reason ${reason}`)
