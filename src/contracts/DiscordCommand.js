@@ -11,6 +11,12 @@ class DiscordCommand {
     return args
   }
 
+  sendMinecraftMessage(message) {
+    if (this.discord.app.minecraft.bot.player !== undefined) {
+      this.discord.app.minecraft.bot.chat(message)
+    }
+  }
+
   onCommand(message) {
     throw new Error('Command onCommand method is not implemented yet!')
   }

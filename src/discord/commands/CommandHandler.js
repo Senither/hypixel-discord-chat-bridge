@@ -1,6 +1,12 @@
 const config = require('../../../config.json')
 const RelogCommand = require('./RelogCommand')
 const HelpCommand = require('./HelpCommand')
+const InviteCommand = require('./InviteCommand')
+const KickCommand = require('./KickCommand')
+const PromoteCommand = require('./PromoteCommand')
+const DemoteCommand = require('./DemoteCommand')
+const OverrideCommand = require('./OverrideCommand')
+const MuteCommand = require('./MuteCommand')
 
 class CommandHandler {
   constructor(discord) {
@@ -12,6 +18,30 @@ class CommandHandler {
       {
         trigger: ['!help', '!h'],
         handler: new HelpCommand(discord),
+      },
+      {
+        trigger: ['!invite', '!inv', '!i'],
+        handler: new InviteCommand(discord),
+      },
+      {
+        trigger: ['!kick', '!k'],
+        handler: new KickCommand(discord),
+      },
+      {
+        trigger: ['!promote', '!up', '!p'],
+        handler: new PromoteCommand(discord),
+      },
+      {
+        trigger: ['!demote', '!down', '!d'],
+        handler: new DemoteCommand(discord),
+      },
+      {
+        trigger: ['!override', '!or', '!o'],
+        handler: new OverrideCommand(discord),
+      },
+      {
+        trigger: ['!mute', '!m'],
+        handler: new MuteCommand(discord),
       },
     ]
   }

@@ -9,18 +9,18 @@ A two-way chat bridge between [Hypixel](https://hypixel.net/) guild chat and a [
 
 ## Table of Content
 
- - [Prerequisites](#prerequisites)
- - [Installation & Setup](#installation--setup)
- - [Configuration](#configuration)
- - [Roadmap](#roadmap)
+- [Prerequisites](#prerequisites)
+- [Installation & Setup](#installation--setup)
+- [Configuration](#configuration)
+- [Roadmap](#roadmap)
 
 ### Prerequisites
 
- * Git
- * NodeJS >= 14
- * Yarn >= 1.2
- * 60~ MB of Memory
- * A Minecraft account
+- Git
+- NodeJS >= 14
+- Yarn >= 1.2
+- 60~ MB of Memory
+- A Minecraft account
 
 ### Installation & Setup
 
@@ -50,7 +50,7 @@ The server is the server the Minecraft client should connect to, by default it w
 
 #### Minecraft
 
-The minecraft section includes a `username` and `password` option, if using a Mojang account these should be filled out with your Mojang username and password for the Minecraft account you plan on using, your Minecraft username is most likely the email it was created with. If using with a microsoft account change `accountType` to `microsoft`, `username` and `password` are not required and will be left blank as you will be directed to the [Microsoft Link page]( https://www.microsoft.com/link). There is also a `lobbyHolder` option which is used in the `!guildlobby` command, this command will whisper the user specified in the config with a message using the `?tw <username>` format, for this command to do anything another bot needs to listen, and then act when receiving the message. 
+The minecraft section includes a `username` and `password` option, if using a Mojang account these should be filled out with your Mojang username and password for the Minecraft account you plan on using, your Minecraft username is most likely the email it was created with. If using with a microsoft account change `accountType` to `microsoft`, `username` and `password` are not required and will be left blank as you will be directed to the [Microsoft Link page](https://www.microsoft.com/link). There is also a `lobbyHolder` option which is used in the `!guildlobby` command, this command will whisper the user specified in the config with a message using the `?tw <username>` format, for this command to do anything another bot needs to listen, and then act when receiving the message.
 
 #### Discord
 
@@ -62,6 +62,17 @@ The Discord channel is the ID of the text channel the bot should be linked with,
 
 The command role is the ID of any role on the server the bot is hosted for, any user with the role will be able to run all the Discord commands built into the bot, like `!help` and `!relog`.
 
+### Commands
+
+<> = Required arguments, [] Optional arguments
+!help - Displays this command list (!h)
+!relog [delay] - Relogs the MC client, a delay can be given in seconds, if no delay is given it will default to 5 seconds (!r)
+!override <command> [args] - Executes the string attached. This is a dangerous permission to grant (!o, !or)
+!invite <player> - Invites the specified user to the guild, providing the guild isn't full (!i, !inv)
+!kick <user> [reason] - Kicks the specified user from the guild (!k)
+!promote <user> - Promotes the specified user by 1 rank (!p, !up)
+!demote <user> - Demotes the specified user by 1 rank (!d, !down)
+
 ### Roadmap
 
 - [ ] Chat message filter
@@ -70,6 +81,10 @@ The command role is the ID of any role on the server the bot is hosted for, any 
   - This can be done by using something like [Winston](https://www.npmjs.com/package/winston), or [chalk](https://www.npmjs.com/package/chalk).
 - [ ] Log guild joins & leaves
   - Send a message in Discord when people join or leave the guild, and when people login or logout of Hypixel.
+- [ ] Add support for officer chat
+  - Allocate a second discord channel to use for two way officer chat.
+- [ ] Add more commands for staff to use
+  - !invite, !kick, !promote, !demote, !ban, !unban
 
 ## License
 
