@@ -20,7 +20,7 @@ class DiscordManager extends CommunicationBridge {
       cacheGuilds: true,
       cacheChannels: true,
       cacheOverwrites: false,
-      cacheRoles: false,
+      cacheRoles: true,
       cacheEmojis: false,
       cachePresences: false,
     })

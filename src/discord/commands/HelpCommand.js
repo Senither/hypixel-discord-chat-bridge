@@ -2,7 +2,6 @@ const DiscordCommand = require('../../contracts/DiscordCommand')
 const Discord = require('discord.js-light')
 
 const helpEmbed = new Discord.MessageEmbed()
-  .setColor('#FFFF00')
   .setTitle('Help')
   .setDescription('`< >` = Required arguments\n`[ ]` = Optional arguments')
   .addFields(
@@ -38,7 +37,7 @@ const helpEmbed = new Discord.MessageEmbed()
 
 class HelpCommand extends DiscordCommand {
   onCommand(message) {
-    message.reply(helpEmbed).then(helpMessage => {
+    message.reply(helpEmbed.setColor(message.guild.me.displayHexColor)).then(helpMessage => {
       setTimeout(() => helpMessage.delete(), 30000)
     })
   }
