@@ -41,7 +41,7 @@ const helpEmbed = new Discord.MessageEmbed()
         `Prefix: \`${prefix}\``,
         `Guild Channel: <#${config.discord.channel}>`,
         //`Officer Channel: \`Still in development\``
-        `Command Role: <@${config.discord.channel}>`,
+        `Command Role: <@&${config.discord.commandRole}>`,
         `Version: \`${package.version}\``,
       ].join('\n'),
       inline: true
