@@ -64,7 +64,10 @@ class CommandHandler {
   }
 
   runCommand(command, message) {
-    if (!this.isCommander(message.member)) {
+    if(message.content == `${prefix}h` || message.content == `${prefix}help`){
+      return command.handler.onCommand(message)
+    }
+    else if (!this.isCommander(message.member)) {
       return message.reply("You're not allowed to run this command!")
     }
 
