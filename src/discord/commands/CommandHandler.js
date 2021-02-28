@@ -1,46 +1,48 @@
-const config = require('../../../config.json')
-const RelogCommand = require('./RelogCommand')
-const HelpCommand = require('./HelpCommand')
-const InviteCommand = require('./InviteCommand')
-const KickCommand = require('./KickCommand')
-const PromoteCommand = require('./PromoteCommand')
-const DemoteCommand = require('./DemoteCommand')
-const OverrideCommand = require('./OverrideCommand')
-const MuteCommand = require('./MuteCommand')
+const RelogCommand = require(`./RelogCommand`)
+const HelpCommand = require(`./HelpCommand`)
+const InviteCommand = require(`./InviteCommand`)
+const KickCommand = require(`./KickCommand`)
+const PromoteCommand = require(`./PromoteCommand`)
+const DemoteCommand = require(`./DemoteCommand`)
+const OverrideCommand = require(`./OverrideCommand`)
+const MuteCommand = require(`./MuteCommand`)
+
+const config = require(`../../../config.json`)
+const prefix = config.discord.prefix
 
 class CommandHandler {
   constructor(discord) {
     this.commands = [
       {
-        trigger: ['!relog', '!r'],
+        trigger: [`${prefix}relog`, `${prefix}r`],
         handler: new RelogCommand(discord),
       },
       {
-        trigger: ['!help', '!h'],
+        trigger: [`${prefix}help`, `${prefix}h`],
         handler: new HelpCommand(discord),
       },
       {
-        trigger: ['!invite', '!inv', '!i'],
+        trigger: [`${prefix}invite`, `${prefix}inv`, `${prefix}i`],
         handler: new InviteCommand(discord),
       },
       {
-        trigger: ['!kick', '!k'],
+        trigger: [`${prefix}kick`, `${prefix}k`],
         handler: new KickCommand(discord),
       },
       {
-        trigger: ['!promote', '!up', '!p'],
+        trigger: [`${prefix}promote`, `${prefix}up`, `${prefix}p`],
         handler: new PromoteCommand(discord),
       },
       {
-        trigger: ['!demote', '!down', '!d'],
+        trigger: [`${prefix}demote`, `${prefix}down`, `${prefix}d`],
         handler: new DemoteCommand(discord),
       },
       {
-        trigger: ['!override', '!or', '!o'],
+        trigger: [`${prefix}override`, `${prefix}or`, `${prefix}o`],
         handler: new OverrideCommand(discord),
       },
       {
-        trigger: ['!mute', '!m'],
+        trigger: [`${prefix}mute`, `${prefix}m`],
         handler: new MuteCommand(discord),
       },
     ]
@@ -63,7 +65,9 @@ class CommandHandler {
   }
 
   runCommand(command, message) {
-    if (!this.isCommander(message.member)) {
+    if (message.content == `${prefix}h` || message.content == `${prefix}help`) {
+      return command.handler.onCommand(message)
+    } else if (!this.isCommander(message.member)) {
       return message.reply("You're not allowed to run this command!")
     }
 

@@ -12,6 +12,7 @@
   "discord": {
     "token": "discordBotToken",
     "channel": "channelId",
-    "commandRole": "roleId"
+    "commandRole": "roleId",
+    "prefix": "!"
   }
 }
