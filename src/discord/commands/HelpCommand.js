@@ -1,8 +1,9 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
 const Discord = require('discord.js-light')
+
+const { version } = require('../../../package.json')
 const config = require('../../../config.json')
 const prefix = config.discord.prefix
-const package = require('../../../package.json')
 
 const helpEmbed = new Discord.MessageEmbed()
   .setTitle('Help')
@@ -42,7 +43,7 @@ const helpEmbed = new Discord.MessageEmbed()
         `Guild Channel: <#${config.discord.channel}>`,
         //`Officer Channel: \`Still in development\``
         `Command Role: <@&${config.discord.commandRole}>`,
-        `Version: \`${package.version}\``,
+        `Version: \`${version}\``,
       ].join('\n'),
       inline: true,
     }
