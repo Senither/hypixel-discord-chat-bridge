@@ -13,6 +13,7 @@
     "token": "discordBotToken",
     "channel": "channelId",
     "commandRole": "roleId",
+    "ownerId": "ownerId",
     "prefix": "!"
   }
 }
