@@ -4,8 +4,10 @@
     "port": 25565
   },
   "minecraft": {
+    "username": "yourUsername",
+    "password": "yourPassword",
     "lobbyHolder": "ignUsername",
-    "accountType": "microsoft"
+    "accountType": "mojang"
   },
   "discord": {
     "token": "discordBotToken",
