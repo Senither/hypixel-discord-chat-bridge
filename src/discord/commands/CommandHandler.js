@@ -70,7 +70,7 @@ class CommandHandler {
     } else if ((message.content.startsWith(`${prefix}o`) || (message.content.startsWith(`${prefix}override`))) && !this.isOwner(message.member)){
       return message.reply("You're not allowed to run this command!")
     } else if((message.content.startsWith(`${prefix}o`) || (message.content.startsWith(`${prefix}override`))) && this.isOwner(message.member)){
-      return command.handle.onCommand(message)
+      return command.handler.onCommand(message)
     } else if (!this.isCommander(message.member)) {
       return message.reply("You're not allowed to run this command!")
     }
