@@ -1,5 +1,3 @@
-const config = require(`../../../config.json`)
-const prefix = config.discord.prefix;
 const RelogCommand = require(`./RelogCommand`)
 const HelpCommand = require(`./HelpCommand`)
 const InviteCommand = require(`./InviteCommand`)
@@ -8,6 +6,9 @@ const PromoteCommand = require(`./PromoteCommand`)
 const DemoteCommand = require(`./DemoteCommand`)
 const OverrideCommand = require(`./OverrideCommand`)
 const MuteCommand = require(`./MuteCommand`)
+
+const config = require(`../../../config.json`)
+const prefix = config.discord.prefix
 
 class CommandHandler {
   constructor(discord) {
@@ -64,10 +65,9 @@ class CommandHandler {
   }
 
   runCommand(command, message) {
-    if(message.content == `${prefix}h` || message.content == `${prefix}help`){
+    if (message.content == `${prefix}h` || message.content == `${prefix}help`) {
       return command.handler.onCommand(message)
-    }
-    else if (!this.isCommander(message.member)) {
+    } else if (!this.isCommander(message.member)) {
       return message.reply("You're not allowed to run this command!")
     }
 

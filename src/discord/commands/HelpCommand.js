@@ -33,7 +33,7 @@ const helpEmbed = new Discord.MessageEmbed()
         'Demote: `d`, `down`',
         'Mute: `m`',
       ].join('\n'),
-      inline: true
+      inline: true,
     },
     {
       name: `Info`,
@@ -44,7 +44,7 @@ const helpEmbed = new Discord.MessageEmbed()
         `Command Role: <@&${config.discord.commandRole}>`,
         `Version: \`${package.version}\``,
       ].join('\n'),
-      inline: true
+      inline: true,
     }
   )
   .setTimestamp()
