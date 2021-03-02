@@ -67,7 +67,13 @@ class CommandHandler {
   runCommand(command, message) {
     if (message.content == `${prefix}h` || message.content == `${prefix}help`) {
       return command.handler.onCommand(message)
-    } else if (!this.isCommander(message.member)) {
+    }
+
+    if (!this.isCommander(message.member)) {
+      return message.reply("You're not allowed to run this command!")
+    }
+
+    if (command.handler.constructor.name == 'OverrideCommand' && !this.isOwner(message.member)) {
       return message.reply("You're not allowed to run this command!")
     }
 
@@ -78,6 +84,10 @@ class CommandHandler {
 
   isCommander(member) {
     return member.roles.cache.find(r => r.id == config.discord.commandRole)
+  }
+
+  isOwner(member) {
+    return member.id == config.discord.ownerId
   }
 }
 

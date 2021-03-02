@@ -10,7 +10,8 @@ class OverrideCommand extends DiscordCommand {
     }
 
     this.sendMinecraftMessage(`/${args}`)
-    message.reply(`/${args} has been executed`)
+
+    message.reply(`\`/${args}\` has been executed`)
   }
 }
 
