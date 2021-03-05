@@ -4,6 +4,7 @@ const StateHandler = require('./handlers/StateHandler')
 const MessageHandler = require('./handlers/MessageHandler')
 const CommandHandler = require('./commands/CommandHandler')
 const Discord = require('discord.js-light')
+const chalk = require('chalk')
 
 class DiscordManager extends CommunicationBridge {
   constructor(app) {
@@ -35,7 +36,7 @@ class DiscordManager extends CommunicationBridge {
 
   onBroadcast({ username, message }) {
     this.client.channels.fetch(config.discord.channel).then(channel => {
-      console.log(`Discord Broadcast > ${username}: ${message}`)
+      console.log(chalk.blue(`Discord Broadcast > ${username}: ${message}`))
 
       channel.send({
         embed: {

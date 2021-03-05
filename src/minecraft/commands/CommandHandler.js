@@ -1,5 +1,6 @@
 const PingCommand = require('./PingCommand')
 const GuildLobbyCommand = require('./GuildLobbyCommand')
+const chalk = require('chalk')
 
 class CommandHandler {
   constructor(minecraft) {
@@ -32,7 +33,7 @@ class CommandHandler {
   }
 
   runCommand(command, player, message) {
-    console.log(`Minecraft Command Handler > ${player} - [${command.handler.constructor.name}] ${message}`)
+    console.log(chalk.grey(`Minecraft Command Handler > ${player} - [${command.handler.constructor.name}] ${message}`))
 
     command.handler.onCommand(player, message)
   }
