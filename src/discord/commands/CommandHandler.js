@@ -10,6 +10,8 @@ const MuteCommand = require(`./MuteCommand`)
 const config = require(`../../../config.json`)
 const prefix = config.discord.prefix
 
+const chalk = require('chalk')
+
 class CommandHandler {
   constructor(discord) {
     this.commands = [
@@ -77,7 +79,7 @@ class CommandHandler {
       return message.reply("You're not allowed to run this command!")
     }
 
-    console.log(`Discord Command Handler > [${command.handler.constructor.name}] ${message.content}`)
+    console.log(chalk.grey(`Discord Command Handler > [${command.handler.constructor.name}] ${message.content}`))
 
     command.handler.onCommand(message)
   }

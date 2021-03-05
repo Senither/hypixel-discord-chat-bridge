@@ -82,10 +82,10 @@ The prefix is the command prefixed used for all the commands in the bot on the D
 
 - [ ] Chat message filter
   - The filter should block any messages sent from Discord to Hypixel that contains banable words, and words that could potentially cause a mute.
-- [ ] Make the console output more informative, and look nicer
-  - This can be done by using something like [Winston](https://www.npmjs.com/package/winston), or [chalk](https://www.npmjs.com/package/chalk).
 - [ ] Log guild joins & leaves
   - Send a message in Discord when people join or leave the guild, and when people login or logout of Hypixel.
+- [ ] Send Discord message when the bot comes online and offline
+  - `Bridge bot is online`, `Bridge bot is offline`
 - [ ] Add support for officer chat
   - Allocate a second discord channel to use for two way officer chat.
 
