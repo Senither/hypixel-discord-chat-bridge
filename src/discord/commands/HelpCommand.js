@@ -19,7 +19,7 @@ const helpEmbed = new Discord.MessageEmbed()
         '`kick <user> [reason]` - Kicks the specified user from the guild',
         '`promote <user>` - Promotes the specified user by 1 rank',
         '`demote <user>` - Demotes the specified user by 1 rank',
-        '`mute <user>` - Demotes the specified user by 1 rank',
+        '`mute <user> [time]` - Mutes the specified user by some amount of time',
       ].join('\n'),
     },
     {
@@ -41,7 +41,6 @@ const helpEmbed = new Discord.MessageEmbed()
       value: [
         `Prefix: \`${prefix}\``,
         `Guild Channel: <#${config.discord.channel}>`,
-        //`Officer Channel: \`Still in development\``
         `Command Role: <@&${config.discord.commandRole}>`,
         `Version: \`${version}\``,
       ].join('\n'),
