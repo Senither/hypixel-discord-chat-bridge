@@ -24,6 +24,18 @@ class StateHandler extends EventHandler {
       return this.bot.chat('/ac §')
     }
 
+    if (this.isLoginMessage(message)) {
+      let user = message.split('>')[1].trim().split('joined.')[0].trim()
+
+      return this.minecraft.broadcastLogin(user)
+    }
+
+    if (this.isLogoutMessage(message)) {
+      let user = message.split('>')[1].trim().split('left.')[0].trim()
+
+      return this.minecraft.broadcastLogout(user)
+    }
+
     if (!this.isGuildMessage(message)) {
       return
     }
@@ -60,6 +72,14 @@ class StateHandler extends EventHandler {
 
   isGuildMessage(message) {
     return message.startsWith('Guild >') && message.includes(':')
+  }
+
+  isLoginMessage(message) {
+    return message.startsWith('Guild >') && message.endsWith('joined.') && !message.includes(':')
+  }
+
+  isLogoutMessage(message) {
+    return message.startsWith('Guild >') && message.endsWith('left.') && !message.includes(':')
   }
 }
 

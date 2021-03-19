@@ -54,6 +54,36 @@ class DiscordManager extends CommunicationBridge {
       })
     })
   }
+
+  onLogin(username) {
+    this.client.channels.fetch(config.discord.channel).then(channel => {
+      channel.send({
+        embed: {
+          color: 'GREEN',
+          timestamp: new Date(),
+          author: {
+            name: `${username} joined.`,
+            icon_url: 'https://www.mc-heads.net/avatar/' + username,
+          },
+        },
+      })
+    })
+  }
+
+  onLogout(username) {
+    this.client.channels.fetch(config.discord.channel).then(channel => {
+      channel.send({
+        embed: {
+          color: 'RED',
+          timestamp: new Date(),
+          author: {
+            name: `${username} left.`,
+            icon_url: 'https://www.mc-heads.net/avatar/' + username,
+          },
+        },
+      })
+    })
+  }
 }
 
 module.exports = DiscordManager
