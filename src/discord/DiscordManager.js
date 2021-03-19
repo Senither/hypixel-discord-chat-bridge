@@ -41,7 +41,7 @@ class DiscordManager extends CommunicationBridge {
       channel.send({
         embed: {
           description: message,
-          color: 8311585,
+          color: 'DARK_GREEN',
           timestamp: new Date(),
           footer: {
             text: 'Message was sent',
