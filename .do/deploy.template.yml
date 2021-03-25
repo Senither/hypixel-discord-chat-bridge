@@ -12,31 +12,31 @@ spec:
       envs:
         - key: SERVER_HOST
           scope: RUN_AND_BUILD_TIME
-          value: mc.hypixel.net
+          value: "mc.hypixel.net"
         - key: SERVER_PORT
           scope: RUN_AND_BUILD_TIME
-          value: '25565'
+          value: "25565"
         - key: MINECRAFT_USERNAME
           scope: RUN_AND_BUILD_TIME
-          value: yourUsername
+          value: "yourUsername"
         - key: MINECRAFT_PASSWORD
           scope: RUN_AND_BUILD_TIME
-          value: yourPassword
+          value: "yourPassword"
         - key: MINECRAFT_ACCOUNT_TYPE
           scope: RUN_AND_BUILD_TIME
-          value: mojang
+          value: "mojang"
         - key: DISCORD_TOKEN
           scope: RUN_AND_BUILD_TIME
-          value: yourDiscordToken
+          value: "yourDiscordToken"
         - key: DISCORD_CHANNEL
           scope: RUN_AND_BUILD_TIME
-          value: discordChannelId
+          value: "discordChannelId"
         - key: DISCORD_COMMAND_ROLE
           scope: RUN_AND_BUILD_TIME
-          value: discordCommandRoleId
+          value: "discordCommandRoleId"
         - key: DISCORD_OWNER_ID
           scope: RUN_AND_BUILD_TIME
-          value: discordOwnerId
+          value: "discordOwnerId"
         - key: DISCORD_PREFIX
           scope: RUN_AND_BUILD_TIME
-          value: '!'
+          value: "!"
