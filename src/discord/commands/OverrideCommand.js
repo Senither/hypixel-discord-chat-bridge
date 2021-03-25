@@ -1,4 +1,3 @@
-const config = require('../../../config.json')
 const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class OverrideCommand extends DiscordCommand {

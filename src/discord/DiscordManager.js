@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const CommunicationBridge = require('../contracts/CommunicationBridge')
 const StateHandler = require('./handlers/StateHandler')
 const MessageHandler = require('./handlers/MessageHandler')
@@ -29,13 +28,13 @@ class DiscordManager extends CommunicationBridge {
     this.client.on('ready', () => this.stateHandler.onReady())
     this.client.on('message', message => this.messageHandler.onMessage(message))
 
-    this.client.login(config.discord.token).catch(error => {
+    this.client.login(this.app.config.discord.token).catch(error => {
       console.error('Discord Bot Error: ', error)
     })
   }
 
   onBroadcast({ username, message }) {
-    this.client.channels.fetch(config.discord.channel).then(channel => {
+    this.client.channels.fetch(app.config.discord.channel).then(channel => {
       console.log(chalk.blue(`Discord Broadcast > ${username}: ${message}`))
 
       channel.send({

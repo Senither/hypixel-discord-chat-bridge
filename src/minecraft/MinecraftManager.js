@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const CommunicationBridge = require('../contracts/CommunicationBridge')
 const CommandHandler = require('./commands/CommandHandler')
 const StateHandler = require('./handlers/StateHandler')
@@ -28,12 +27,12 @@ class MinecraftManager extends CommunicationBridge {
 
   createBotConnection() {
     return mineflayer.createBot({
-      host: config.server.host,
-      port: config.server.port,
-      username: config.minecraft.username,
-      password: config.minecraft.password,
+      host: this.app.config.server.host,
+      port: this.app.config.server.port,
+      username: this.app.config.minecraft.username,
+      password: this.app.config.minecraft.password,
       version: false,
-      auth: config.minecraft.accountType,
+      auth: this.app.config.minecraft.accountType,
     })
   }
 

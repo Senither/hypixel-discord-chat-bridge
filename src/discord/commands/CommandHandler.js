@@ -7,44 +7,45 @@ const DemoteCommand = require(`./DemoteCommand`)
 const OverrideCommand = require(`./OverrideCommand`)
 const MuteCommand = require(`./MuteCommand`)
 
-const config = require(`../../../config.json`)
-const prefix = config.discord.prefix
-
 const chalk = require('chalk')
 
 class CommandHandler {
   constructor(discord) {
+    this.discord = discord
+
+    this.prefix = discord.app.config.discord.prefix
+
     this.commands = [
       {
-        trigger: [`${prefix}relog`, `${prefix}r`],
+        trigger: [`${this.prefix}relog`, `${this.prefix}r`],
         handler: new RelogCommand(discord),
       },
       {
-        trigger: [`${prefix}help`, `${prefix}h`],
+        trigger: [`${this.prefix}help`, `${this.prefix}h`],
         handler: new HelpCommand(discord),
       },
       {
-        trigger: [`${prefix}invite`, `${prefix}inv`, `${prefix}i`],
+        trigger: [`${this.prefix}invite`, `${this.prefix}inv`, `${this.prefix}i`],
         handler: new InviteCommand(discord),
       },
       {
-        trigger: [`${prefix}kick`, `${prefix}k`],
+        trigger: [`${this.prefix}kick`, `${this.prefix}k`],
         handler: new KickCommand(discord),
       },
       {
-        trigger: [`${prefix}promote`, `${prefix}up`, `${prefix}p`],
+        trigger: [`${this.prefix}promote`, `${this.prefix}up`, `${this.prefix}p`],
         handler: new PromoteCommand(discord),
       },
       {
-        trigger: [`${prefix}demote`, `${prefix}down`, `${prefix}d`],
+        trigger: [`${this.prefix}demote`, `${this.prefix}down`, `${this.prefix}d`],
         handler: new DemoteCommand(discord),
       },
       {
-        trigger: [`${prefix}override`, `${prefix}or`, `${prefix}o`],
+        trigger: [`${this.prefix}override`, `${this.prefix}or`, `${this.prefix}o`],
         handler: new OverrideCommand(discord),
       },
       {
-        trigger: [`${prefix}mute`, `${prefix}m`],
+        trigger: [`${this.prefix}mute`, `${this.prefix}m`],
         handler: new MuteCommand(discord),
       },
     ]
@@ -67,7 +68,7 @@ class CommandHandler {
   }
 
   runCommand(command, message) {
-    if (message.content == `${prefix}h` || message.content == `${prefix}help`) {
+    if (message.content == `${this.prefix}h` || message.content == `${this.prefix}help`) {
       return command.handler.onCommand(message)
     }
 
@@ -85,11 +86,11 @@ class CommandHandler {
   }
 
   isCommander(member) {
-    return member.roles.cache.find(r => r.id == config.discord.commandRole)
+    return member.roles.cache.find(r => r.id == this.discord.app.config.discord.commandRole)
   }
 
   isOwner(member) {
-    return member.id == config.discord.ownerId
+    return member.id == this.discord.app.config.discord.ownerId
   }
 }
 
