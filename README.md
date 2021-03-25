@@ -8,20 +8,25 @@ A two-way chat bridge between [Hypixel](https://hypixel.net/) guild chat and a [
 
 ## Table of Content
 
-- [Prerequisites](#prerequisites)
-- [Installation & Setup](#installation--setup)
+- [Installation using NodeJS](#installation-using-nodejs)
+  - [Prerequisites](#prerequisites)
+  - [Setup Guide](#setup-guide)
+- [Installation using Docker](#installation-using-docker)
+  - [Prerequisites](#prerequisites-1)
+  - [Setup Guide](#setup-guide-1)
 - [Configuration](#configuration)
 - [Roadmap](#roadmap)
+
+## Installation using NodeJS
 
 ### Prerequisites
 
 - Git
 - NodeJS >= 14
 - Yarn >= 1.2
-- 60~ MB of Memory
 - A Minecraft account
 
-### Installation & Setup
+### Setup Guide
 
 To get started, clone down the repository using:
 
@@ -38,6 +43,28 @@ While the dependencies are being installed you can copy the configuration file.
 Next edit and setup the config file with a proper Minecraft and Discord settings, once you're done you can start the app.
 
     node index.js
+
+## Installation using Docker
+
+### Prerequisites
+
+- Git
+- Docker >= 20
+- A Minecraft account
+
+_Older versions may also work, but have not been tested._
+
+### Setup Guide
+
+To get started, clone down the repository using:
+
+    git clone https://github.com/Senither/hypixel-discord-chat-bridge.git
+
+Next go into the `hypixel-discord-chat-bridge` folder and open the `docker-compose.yml` file, within the file you'll find all the environment variables that can be used to setup the bot, you should fill replace the default values with your real Discord and Minecraft login info, once you're done you can start the bot using Docker.
+
+    docker-compose up -d
+
+And you're done! The command will start a detached instance of the bot, and ensure that the container is deleted after you're done using it.
 
 ### Configuration
 
