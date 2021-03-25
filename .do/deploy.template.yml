@@ -4,7 +4,7 @@ spec:
     - name: hypixel-discord-chat-bridge
       dockerfile_path: Dockerfile
       github:
-        branch: master
+        branch: do-spec
         deploy_on_push: true
         repo: Senither/hypixel-discord-chat-bridge
       instance_count: 1
