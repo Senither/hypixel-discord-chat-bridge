@@ -1,6 +1,6 @@
 spec:
   name: hypixel-discord-chat-bridge
-  workers:
+  services:
     - name: hypixel-discord-chat-bridge
       dockerfile_path: Dockerfile
       github:
