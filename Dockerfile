@@ -4,7 +4,7 @@ FROM node:14-alpine
 
 # Minecraft Server
 ENV SERVER_HOST=mc.hypixel.net
-ENV RUN_AND_BUILD_TIME=25565
+ENV SERVER_PORT=25565
 # Minecraft Account
 ENV MINECRAFT_USERNAME=yourUsername
 ENV MINECRAFT_PASSWORD=yourPassword
