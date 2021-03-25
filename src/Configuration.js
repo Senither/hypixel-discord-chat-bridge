@@ -21,9 +21,29 @@ class Configuration {
     },
   }
 
+  environmentOverrides = {
+    SERVER_HOST: val => (this.properties.server.host = val),
+    SERVER_PORT: val => (this.properties.server.port = val),
+    MINECRAFT_USERNAME: val => (this.properties.minecraft.username = val),
+    MINECRAFT_PASSWORD: val => (this.properties.minecraft.password = val),
+    MINECRAFT_LOBBY_HOLDER: val => (this.properties.minecraft.lobbyHolder = val),
+    MINECRAFT_ACCOUNT_TYPE: val => (this.properties.minecraft.accountType = val),
+    DISCORD_TOKEN: val => (this.properties.discord.token = val),
+    DISCORD_CHANNEL: val => (this.properties.discord.channel = val),
+    DISCORD_COMMAND_ROLE: val => (this.properties.discord.commandRole = val),
+    DISCORD_OWNER_ID: val => (this.properties.discord.ownerId = val),
+    DISCORD_PREFIX: val => (this.properties.discord.prefix = val),
+  }
+
   constructor() {
     if (fs.existsSync('config.json')) {
       this.properties = require('../config.json')
+    }
+
+    for (let environment of Object.keys(process.env)) {
+      if (this.environmentOverrides.hasOwnProperty(environment)) {
+        this.environmentOverrides[environment](process.env[environment])
+      }
     }
   }
 
