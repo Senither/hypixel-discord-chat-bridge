@@ -34,7 +34,7 @@ class DiscordManager extends CommunicationBridge {
   }
 
   onBroadcast({ username, message }) {
-    this.client.channels.fetch(app.config.discord.channel).then(channel => {
+    this.client.channels.fetch(this.app.config.discord.channel).then(channel => {
       console.log(chalk.blue(`Discord Broadcast > ${username}: ${message}`))
 
       channel.send({
