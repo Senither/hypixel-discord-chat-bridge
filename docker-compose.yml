@@ -1,6 +1,6 @@
 version: '3'
 services:
-  api:
+  bridge:
     restart: unless-stopped
     build:
       context: .
