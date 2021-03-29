@@ -34,6 +34,7 @@ class StateHandler extends EventHandler {
 
     let userParts = group.split(' ')
     let username = userParts[userParts.length - (hasRank ? 2 : 1)]
+    let guildRank = userParts[userParts.length - 1].replace(/\W/g, '')
 
     if (this.isMessageFromBot(username)) {
       return
@@ -47,6 +48,7 @@ class StateHandler extends EventHandler {
     this.minecraft.broadcastMessage({
       username: username,
       message: playerMessage,
+      guildRank: guildRank,
     })
   }
 

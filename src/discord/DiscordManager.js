@@ -33,9 +33,9 @@ class DiscordManager extends CommunicationBridge {
     })
   }
 
-  onBroadcast({ username, message }) {
+  onBroadcast({ username, message , guildRank}) {
     this.client.channels.fetch(this.app.config.discord.channel).then(channel => {
-      console.log(chalk.blue(`Discord Broadcast > ${username}: ${message}`))
+      console.log(chalk.blue(`Discord Broadcast > ${username} [${guildRank}]: ${message}`))
 
       channel.send({
         embed: {
@@ -43,7 +43,7 @@ class DiscordManager extends CommunicationBridge {
           color: 8311585,
           timestamp: new Date(),
           footer: {
-            text: 'Message was sent',
+            text: guildRank,
           },
           author: {
             name: username,
