@@ -35,8 +35,11 @@ class StateHandler extends EventHandler {
     let userParts = group.split(' ')
     let username = userParts[userParts.length - (hasRank ? 2 : 1)]
     let guildRank = userParts[userParts.length - 1].replace(/[\[\]]/g, '')
-    if (guildRank == username) guildRank = 'Member'
-    
+
+    if (guildRank == username) {
+      guildRank = 'Member'
+    }
+
     if (this.isMessageFromBot(username)) {
       return
     }
