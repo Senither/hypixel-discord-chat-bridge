@@ -40,13 +40,43 @@ class DiscordManager extends CommunicationBridge {
       channel.send({
         embed: {
           description: message,
-          color: 8311585,
+          color: '#145A46',
           timestamp: new Date(),
           footer: {
             text: guildRank,
           },
           author: {
             name: username,
+            icon_url: 'https://www.mc-heads.net/avatar/' + username,
+          },
+        },
+      })
+    })
+  }
+
+  onLogin(username) {
+    this.client.channels.fetch(config.discord.channel).then(channel => {
+      channel.send({
+        embed: {
+          color: 'GREEN',
+          timestamp: new Date(),
+          author: {
+            name: `${username} joined.`,
+            icon_url: 'https://www.mc-heads.net/avatar/' + username,
+          },
+        },
+      })
+    })
+  }
+
+  onLogout(username) {
+    this.client.channels.fetch(config.discord.channel).then(channel => {
+      channel.send({
+        embed: {
+          color: 'RED',
+          timestamp: new Date(),
+          author: {
+            name: `${username} left.`,
             icon_url: 'https://www.mc-heads.net/avatar/' + username,
           },
         },
