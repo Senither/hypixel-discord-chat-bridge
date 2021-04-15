@@ -55,7 +55,7 @@ class DiscordManager extends CommunicationBridge {
   }
 
   onLogin(username) {
-    this.client.channels.fetch(config.discord.channel).then(channel => {
+    this.client.channels.fetch(this.app.config.discord.channel).then(channel => {
       channel.send({
         embed: {
           color: 'GREEN',
@@ -70,7 +70,7 @@ class DiscordManager extends CommunicationBridge {
   }
 
   onLogout(username) {
-    this.client.channels.fetch(config.discord.channel).then(channel => {
+    this.client.channels.fetch(this.app.config.discord.channel).then(channel => {
       channel.send({
         embed: {
           color: 'RED',
