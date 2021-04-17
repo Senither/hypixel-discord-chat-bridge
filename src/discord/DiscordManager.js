@@ -2,6 +2,7 @@ const CommunicationBridge = require('../contracts/CommunicationBridge')
 const StateHandler = require('./handlers/StateHandler')
 const MessageHandler = require('./handlers/MessageHandler')
 const CommandHandler = require('./commands/CommandHandler')
+const MessageManager = require('./MessageManager')
 const Discord = require('discord.js-light')
 const chalk = require('chalk')
 
@@ -11,6 +12,7 @@ class DiscordManager extends CommunicationBridge {
 
     this.app = app
 
+    this.messageManager = new MessageManager(this)
     this.stateHandler = new StateHandler(this)
     this.messageHandler = new MessageHandler(this, new CommandHandler(this))
   }
@@ -33,7 +35,7 @@ class DiscordManager extends CommunicationBridge {
     })
   }
 
-  onBroadcast({ username, message , guildRank}) {
+  onBroadcast({ username, message, guildRank }) {
     this.client.channels.fetch(this.app.config.discord.channel).then(channel => {
       console.log(chalk.blue(`Discord Broadcast > ${username} [${guildRank}]: ${message}`))
 
