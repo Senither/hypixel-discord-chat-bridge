@@ -80,7 +80,7 @@ The minecraft section includes a `username` and `password` option, if using a Mo
 
 #### Discord
 
-The Discord options includes the `token`, `channel`, `commandRole`, `ownerId`, and `prefix` options.
+The Discord options includes the `token`, `channel`, `commandRole`, `ownerId`, `prefix` and `messageMode` options.
 
 The token is the Discord application token, if you don't already have a Discord App, you can [create a new app](https://discordapp.com/developers), then convert the app to a Discord bot, and then get your Discord bot token on the "Bot" page.
 
@@ -93,6 +93,8 @@ The command role is the ID of any role on the server the bot is hosted for, any 
 The owner ID is similar to the command role, however this is the ID of the user that should have full access to the `!override` command, the user with this permission can use the command to run virtually any command via the bot, and should therefore be limited to just the owner of the bot.
 
 The prefix is the command prefixed used for all the commands in the bot on the Discord side, by default this is set it `!`.
+
+The messageMode can either be `bot` or `webhook`. This selects how the messages should be displayed when sent from Minecraft to Discord. To see an example of what webhook mode looks like [click here](https://i.imgur.com/tulcMVA.png) and for bot mode [click here](https://i.imgur.com/07EPheLh.jpg).
 
 ### Commands
 
