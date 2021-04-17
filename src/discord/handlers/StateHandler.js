@@ -9,13 +9,11 @@ class StateHandler {
     console.log(chalk.green('Discord client ready, logged in as ' + this.discord.client.user.tag))
     this.discord.client.user.setActivity('Guild Chat', { type: 'WATCHING' })
 
-    this.discord.messageManager.setupWebhook()
-    this.discord.messageManager.broadcast({
-      embed: {
-        author: { name: `Chat Bridge is Online` },
-        color: '7CFC00'
-      }
-    })
+    await this.discord.messageManager.setupWebhook()
+    this.discord.messageManager.broadcastEmbed({
+      author: { name: `Chat Bridge is Online` },
+      color: '7CFC00',
+    }, this.discord.client.user.username, this.discord.client.user.avatarURL())
   }
 }
 

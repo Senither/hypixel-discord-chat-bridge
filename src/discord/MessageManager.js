@@ -3,33 +3,57 @@ class MessageManager {
     this.discord = discord
   }
 
-  broadcast(content) {
-    if (this.discord.app.config.discord.messageMode == 'bot') {
-      this.discord.client.channels.fetch(this.discord.app.config.discord.channel).then(channel => {
-        channel.send(content)
-      })
-    } else {
-      this.discord.webhook.send(content)
+  broadcastMessage(message, username, icon) {
+    switch (this.discord.app.config.discord.messageMode.toLowerCase()) {
+      case 'bot':
+        this.discord.client.channels.fetch(this.discord.app.config.discord.channel).then(channel => {
+          channel.send(message)
+        })
+        break
+      case 'webhook':
+        this.discord.webhook.send(
+          message, { username: username, avatarURL: icon }
+        )
+        break
+      default:
+        throw new Error('Invalid message mode: must be bot or webhook')
     }
   }
 
-  setupWebhook() {
-    return new Promise((resolve, reject) => {
-      this.discord.client.channels.cache.get(this.discord.app.config.discord.channel).fetchWebhooks().then(webhooks => {
-        if (webhooks.first()) {
-          this.discord.webhook = webhooks.first()
-          resolve()
-        } else {
-          this.discord.client.channels.cache.get(this.discord.app.config.discord.channel).createWebhook(
-            this.discord.client.user.username,
-            { avatar: this.discord.client.user.avatarURL() }
-          ).then(webhook => {
-            this.discord.webhook = webhook
-            resolve()
-          })
-        }
+  broadcastEmbed(embed, username, icon) {
+    switch (this.discord.app.config.discord.messageMode.toLowerCase()) {
+      case 'bot':
+        this.discord.client.channels.fetch(this.discord.app.config.discord.channel).then(channel => {
+          channel.send(embed)
+        })
+        break
+      case 'webhook':
+        this.discord.webhook.send(
+          { username: username, avatarURL: icon, embeds: [embed] }
+        )
+        break
+      default:
+        throw new Error('Invalid message mode: must be bot or webhook')
+    }
+  }
+
+  async setupWebhook() {
+    if (this.discord.app.config.discord.messageMode != 'bot') {
+      this.discord.webhook = await this.getWebhook()
+    }
+  }
+
+  async getWebhook() {
+    let channel = this.discord.client.channels.cache.get(this.discord.app.config.discord.channel)
+    let webhooks = await channel.fetchWebhooks()
+    if (webhooks.first()) {
+      return webhooks.first()
+    } else {
+      var res = await channel.createWebhook(this.discord.client.user.username, {
+        avatar: this.discord.client.user.avatarURL(),
       })
-    })
+      return res
+    }
   }
 }
 
