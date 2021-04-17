@@ -10,7 +10,7 @@ class StateHandler {
     this.discord.client.user.setActivity('Guild Chat', { type: 'WATCHING' })
 
     await this.discord.messageManager.setupWebhook()
-    this.discord.messageManager.broadcastEmbed({
+    this.discord.messageManager.broadcastInfoMessage({
       author: { name: `Chat Bridge is Online` },
       color: '7CFC00',
     }, this.discord.client.user.username, this.discord.client.user.avatarURL())
