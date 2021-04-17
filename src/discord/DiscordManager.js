@@ -36,54 +36,18 @@ class DiscordManager extends CommunicationBridge {
   }
 
   onBroadcast({ username, message, guildRank }) {
-    this.client.channels.fetch(this.app.config.discord.channel).then(channel => {
-      console.log(chalk.blue(`Discord Broadcast > ${username} [${guildRank}]: ${message}`))
-
-      channel.send({
-        embed: {
-          description: message,
-          color: '#6495ED',
-          timestamp: new Date(),
-          footer: {
-            text: guildRank,
-          },
-          author: {
-            name: username,
-            icon_url: 'https://www.mc-heads.net/avatar/' + username,
-          },
-        },
-      })
-    })
+    console.log(chalk.blue(`Discord Broadcast > ${username} [${guildRank}]: ${message}`))
+    this.messageManager.broadcastGuildMessage(message, username, guildRank)
   }
 
   onLogin(username) {
-    this.client.channels.fetch(this.app.config.discord.channel).then(channel => {
-      channel.send({
-        embed: {
-          color: 'GREEN',
-          timestamp: new Date(),
-          author: {
-            name: `${username} joined.`,
-            icon_url: 'https://www.mc-heads.net/avatar/' + username,
-          },
-        },
-      })
-    })
+    console.log(chalk.blue(`Discord Broadcast > ${username} joined`))
+    this.messageManager.broadcastPlayerLogin(username)
   }
 
   onLogout(username) {
-    this.client.channels.fetch(this.app.config.discord.channel).then(channel => {
-      channel.send({
-        embed: {
-          color: 'RED',
-          timestamp: new Date(),
-          author: {
-            name: `${username} left.`,
-            icon_url: 'https://www.mc-heads.net/avatar/' + username,
-          },
-        },
-      })
-    })
+    console.log(chalk.blue(`Discord Broadcast > ${username} left`))
+    this.messageManager.broadcastPlayerLogout(username)
   }
 }
 
