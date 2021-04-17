@@ -18,6 +18,7 @@ class Configuration {
       commandRole: '',
       ownerId: '',
       prefix: '!',
+      messageMode: 'bot'
     },
   }
 
@@ -33,6 +34,7 @@ class Configuration {
     DISCORD_COMMAND_ROLE: val => (this.properties.discord.commandRole = val),
     DISCORD_OWNER_ID: val => (this.properties.discord.ownerId = val),
     DISCORD_PREFIX: val => (this.properties.discord.prefix = val),
+    MESSAGE_MODE: val => (this.properties.discord.messageMode = val),
   }
 
   constructor() {
