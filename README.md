@@ -111,10 +111,10 @@ The messageMode can either be `bot` or `webhook`. This selects how the messages 
 
 - [ ] Chat message filter
   - The filter should block any messages sent from Discord to Hypixel that contains banable words, and words that could potentially cause a mute.
-- [ ] Log guild joins & leaves
-  - Send a message in Discord when people join or leave the guild, and when people login or logout of Hypixel.
-- [ ] Send Discord message when the bot comes online and offline
-  - `Bridge bot is online`, `Bridge bot is offline`
+- [ ] Log guild events
+  - Guild joins/leaves/kicks, mutes/unmutes and promotion/demotions
+- [ ] Ingame commands
+  - Add commands for players to use ingame to check other player stats (eg `!skills <ign>`, `!weight <ign>` etc)
 - [ ] Add support for officer chat
   - Allocate a second discord channel to use for two way officer chat.
 
