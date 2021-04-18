@@ -91,25 +91,6 @@ class MessageManager {
       channel.send({ embed: embed })
     })
   }
-
-  async setupWebhook() {
-    if (this.discord.app.config.discord.messageMode != 'bot') {
-      this.discord.webhook = await this.getWebhook()
-    }
-  }
-
-  async getWebhook() {
-    let channel = this.discord.client.channels.cache.get(this.discord.app.config.discord.channel)
-    let webhooks = await channel.fetchWebhooks()
-    if (webhooks.first()) {
-      return webhooks.first()
-    } else {
-      var res = await channel.createWebhook(this.discord.client.user.username, {
-        avatar: this.discord.client.user.avatarURL(),
-      })
-      return res
-    }
-  }
 }
 
 module.exports = MessageManager
