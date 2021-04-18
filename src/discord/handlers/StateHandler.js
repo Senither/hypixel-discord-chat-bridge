@@ -18,6 +18,11 @@ class StateHandler {
       color: '7CFC00',
     }, this.discord.client.user.username, this.discord.client.user.avatarURL())
   }
+
+  async onClose() {
+    console.log(chalk.green('Process closed'))
+    process.exit()
+  }
 }
 
 async function getWebhook(discord) {

@@ -33,6 +33,8 @@ class DiscordManager extends CommunicationBridge {
     this.client.login(this.app.config.discord.token).catch(error => {
       console.error('Discord Bot Error: ', error)
     })
+
+    process.on('SIGINT', () => this.stateHandler.onClose())
   }
 
   onBroadcast({ username, message, guildRank }) {
