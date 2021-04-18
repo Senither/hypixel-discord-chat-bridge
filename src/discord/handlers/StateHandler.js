@@ -13,15 +13,25 @@ class StateHandler {
       this.discord.webhook = await getWebhook(this.discord)
     }
 
-    this.discord.messageManager.broadcastInfoMessage({
-      author: { name: `Chat Bridge is Online` },
-      color: '7CFC00',
-    }, this.discord.client.user.username, this.discord.client.user.avatarURL())
+    this.discord.client.channels.fetch(this.discord.app.config.discord.channel).then(channel => {
+      channel.send({
+        embed: {
+          author: { name: `Chat Bridge is Online` },
+          color: '7CFC00'
+        }
+      })
+    })
   }
 
-  async onClose() {
-    console.log(chalk.green('Process closed'))
-    process.exit()
+  onClose() {
+    this.discord.client.channels.fetch(this.discord.app.config.discord.channel).then(channel => {
+      channel.send({
+        embed: {
+          author: { name: `Chat Bridge is Offline` },
+          color: 'DC143C'
+        }
+      }).then(() => { process.exit() })
+    })
   }
 }
 
