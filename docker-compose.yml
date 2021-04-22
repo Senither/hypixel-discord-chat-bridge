@@ -16,3 +16,4 @@ services:
       DISCORD_CHANNEL: discordChannelId
       DISCORD_COMMAND_ROLE: discordCommandRoleId
       DISCORD_OWNER_ID: discordOwnerId
+      MESSAGE_MODE: bot
