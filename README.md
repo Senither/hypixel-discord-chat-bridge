@@ -94,9 +94,12 @@ The owner ID is similar to the command role, however this is the ID of the user 
 
 The prefix is the command prefixed used for all the commands in the bot on the Discord side, by default this is set it `!`.
 
-The messageMode can either be `bot` or `webhook`. This selects how the messages should be displayed when sent from Minecraft to Discord. To see an example of what webhook mode looks like [click here](https://i.imgur.com/tulcMVA.png) and for bot mode [click here](https://i.imgur.com/L8XhcNn.png). If webhook mode is selected the bot requires the `Manage Webhooks` permission in the channel it's running in. The bot always requires the `Send Messages` and `View Channel` permissions in the channel you're using it in.
+The messageMode can either be `bot` or `webhook`. This selects how the messages should be displayed when sent from Minecraft to Discord. If webhook mode is selected the bot requires the `Manage Webhooks` permission in the channel it's running in. The bot always requires the `Send Messages` and `View Channel` permissions in the channel you're using it in.
 
-> Note: The Discord rate limit for webhooks is 30 requests every 60 seconds, wheras for normal bots it's 5 messages every 5 seconds. Using webhooks effectively halves the number of messages the bot can send per minute which may cause issues in an active guild.
+- [View Webhook example](https://i.imgur.com/tulcMVA.png)
+- [View Bot Mode example](https://i.imgur.com/L8XhcNn.png)
+
+> Note: The Discord rate limit for webhooks is 30 requests every 60 seconds, whereas for normal bot messages it's 5 messages every 5 seconds. Using webhooks effectively halves the number of messages the bot can send per minute which may cause issues in an active guild.
 
 ### Commands
 
