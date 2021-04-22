@@ -56,12 +56,14 @@ class DiscordManager extends CommunicationBridge {
           })
         })
         break
+
       case 'webhook':
         message = message.replace(/@/g, '') // Stop pinging @everyone or @here
         this.app.discord.webhook.send(
           message, { username: username, avatarURL: 'https://www.mc-heads.net/avatar/' + username }
         )
         break
+
       default:
         throw new Error('Invalid message mode: must be bot or webhook')
     }
@@ -84,6 +86,7 @@ class DiscordManager extends CommunicationBridge {
           })
         })
         break
+
       case 'webhook':
         this.app.discord.webhook.send({
           username: username, avatarURL: 'https://www.mc-heads.net/avatar/' + username, embeds: [{
@@ -94,6 +97,7 @@ class DiscordManager extends CommunicationBridge {
           }]
         })
         break
+
       default:
         throw new Error('Invalid message mode: must be bot or webhook')
     }
@@ -116,6 +120,7 @@ class DiscordManager extends CommunicationBridge {
           })
         })
         break
+
       case 'webhook':
         this.app.discord.webhook.send({
           username: username, avatarURL: 'https://www.mc-heads.net/avatar/' + username, embeds: [{
@@ -126,6 +131,7 @@ class DiscordManager extends CommunicationBridge {
           }]
         })
         break
+
       default:
         throw new Error('Invalid message mode: must be bot or webhook')
     }
