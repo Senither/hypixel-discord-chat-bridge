@@ -2,8 +2,7 @@ const RelogCommand = require(`./RelogCommand`)
 const HelpCommand = require(`./HelpCommand`)
 const InviteCommand = require(`./InviteCommand`)
 const KickCommand = require(`./KickCommand`)
-const PromoteCommand = require(`./PromoteCommand`)
-const DemoteCommand = require(`./DemoteCommand`)
+const SetrankCommand = require('./SetrankCommand')
 const ExecuteCommand = require(`./ExecuteCommand`)
 const MuteCommand = require(`./MuteCommand`)
 const UnmuteCommand = require('./UnmuteCommand')
@@ -34,12 +33,8 @@ class CommandHandler {
         handler: new KickCommand(discord),
       },
       {
-        trigger: [`promote`, `up`, `p`],
-        handler: new PromoteCommand(discord),
-      },
-      {
-        trigger: [`demote`, `down`, `d`],
-        handler: new DemoteCommand(discord),
+        trigger: [`setrank`, `rank`, `set`],
+        handler: new SetrankCommand(discord),
       },
       {
         trigger: [`execute`, `exec`, `e`],
