@@ -59,6 +59,9 @@ class HelpCommand extends DiscordCommand {
     }).then(helpMessage => {
       setTimeout(() => {
         helpMessage.delete()
+        if (message.deletable) {
+          message.delete()
+        }
       }, 30000)
     })
   }
