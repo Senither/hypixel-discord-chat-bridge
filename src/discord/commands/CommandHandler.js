@@ -4,7 +4,7 @@ const InviteCommand = require(`./InviteCommand`)
 const KickCommand = require(`./KickCommand`)
 const PromoteCommand = require(`./PromoteCommand`)
 const DemoteCommand = require(`./DemoteCommand`)
-const OverrideCommand = require(`./OverrideCommand`)
+const ExecuteCommand = require(`./ExecuteCommand`)
 const MuteCommand = require(`./MuteCommand`)
 
 const chalk = require('chalk')
@@ -41,8 +41,8 @@ class CommandHandler {
         handler: new DemoteCommand(discord),
       },
       {
-        trigger: [`override`, `or`, `o`],
-        handler: new OverrideCommand(discord),
+        trigger: [`execute`, `exec`, `e`],
+        handler: new ExecuteCommand(discord),
       },
       {
         trigger: [`mute`, `m`],
@@ -85,7 +85,7 @@ class CommandHandler {
       })
     }
 
-    if (command.handler.constructor.name == 'OverrideCommand' && !this.isOwner(message.member)) {
+    if (command.handler.constructor.name == 'ExecuteCommand' && !this.isOwner(message.member)) {
       return message.channel.send({
         embed: {
           color: 'DC143C',
