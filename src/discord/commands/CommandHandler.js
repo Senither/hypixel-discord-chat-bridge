@@ -6,6 +6,7 @@ const PromoteCommand = require(`./PromoteCommand`)
 const DemoteCommand = require(`./DemoteCommand`)
 const ExecuteCommand = require(`./ExecuteCommand`)
 const MuteCommand = require(`./MuteCommand`)
+const UnmuteCommand = require('./UnmuteCommand')
 
 const chalk = require('chalk')
 
@@ -47,6 +48,10 @@ class CommandHandler {
       {
         trigger: [`mute`, `m`],
         handler: new MuteCommand(discord),
+      },
+      {
+        trigger: [`unmute`, `um`],
+        handler: new UnmuteCommand(discord),
       },
     ]
   }
