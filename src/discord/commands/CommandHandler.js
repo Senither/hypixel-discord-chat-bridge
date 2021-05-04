@@ -17,42 +17,46 @@ class CommandHandler {
 
     this.commands = [
       {
-        trigger: [`${this.prefix}relog`, `${this.prefix}r`],
+        trigger: [`relog`, `r`],
         handler: new RelogCommand(discord),
       },
       {
-        trigger: [`${this.prefix}help`, `${this.prefix}h`],
+        trigger: [`help`, `h`],
         handler: new HelpCommand(discord),
       },
       {
-        trigger: [`${this.prefix}invite`, `${this.prefix}inv`, `${this.prefix}i`],
+        trigger: [`invite`, `inv`, `i`],
         handler: new InviteCommand(discord),
       },
       {
-        trigger: [`${this.prefix}kick`, `${this.prefix}k`],
+        trigger: [`kick`, `k`],
         handler: new KickCommand(discord),
       },
       {
-        trigger: [`${this.prefix}promote`, `${this.prefix}up`, `${this.prefix}p`],
+        trigger: [`promote`, `up`, `p`],
         handler: new PromoteCommand(discord),
       },
       {
-        trigger: [`${this.prefix}demote`, `${this.prefix}down`, `${this.prefix}d`],
+        trigger: [`demote`, `down`, `d`],
         handler: new DemoteCommand(discord),
       },
       {
-        trigger: [`${this.prefix}override`, `${this.prefix}or`, `${this.prefix}o`],
+        trigger: [`override`, `or`, `o`],
         handler: new OverrideCommand(discord),
       },
       {
-        trigger: [`${this.prefix}mute`, `${this.prefix}m`],
+        trigger: [`mute`, `m`],
         handler: new MuteCommand(discord),
       },
     ]
   }
 
   handle(message) {
-    const commandTrigger = message.content.toLowerCase().split(' ')[0]
+    if (!message.content.startsWith(this.prefix)) {
+      return false
+    }
+
+    const commandTrigger = message.content.toLowerCase().substr(this.prefix.length).split(' ')[0]
 
     for (let command of this.commands) {
       for (let trigger of command.trigger) {
@@ -68,16 +72,26 @@ class CommandHandler {
   }
 
   runCommand(command, message) {
-    if (message.content == `${this.prefix}h` || message.content == `${this.prefix}help`) {
+    if (command.handler.constructor.name == 'HelpCommand') {
       return command.handler.onCommand(message)
     }
 
     if (!this.isCommander(message.member)) {
-      return message.reply("You're not allowed to run this command!")
+      return message.channel.send({
+        embed: {
+          color: 'DC143C',
+          description: `<@!${message.author.id}> You're not allowed to run this command!`
+        }
+      })
     }
 
     if (command.handler.constructor.name == 'OverrideCommand' && !this.isOwner(message.member)) {
-      return message.reply("You're not allowed to run this command!")
+      return message.channel.send({
+        embed: {
+          color: 'DC143C',
+          description: `<@!${message.author.id}> You're not allowed to run this command!`
+        }
+      })
     }
 
     console.log(chalk.grey(`Discord Command Handler > [${command.handler.constructor.name}] ${message.content}`))
