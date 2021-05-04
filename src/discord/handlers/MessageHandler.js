@@ -13,6 +13,10 @@ class MessageHandler {
       return
     }
 
+    if (!this.isInGuildChannel(message)) {
+      return
+    }
+
     const content = this.stripDiscordContent(message.content).trim()
     if (content.length == 0) {
       return
@@ -39,7 +43,11 @@ class MessageHandler {
   }
 
   shouldBroadcastMessage(message) {
-    return !message.author.bot && message.channel.id == this.discord.app.config.discord.channel && message.content && message.content.length > 0
+    return !message.author.bot && message.content && message.content.length > 0
+  }
+
+  isInGuildChannel(message) {
+    return message.channel.id == this.discord.app.config.discord.channel
   }
 }
 
