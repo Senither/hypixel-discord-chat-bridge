@@ -1,48 +1,49 @@
-const CommunicationBridge = require('../contracts/CommunicationBridge')
-const CommandHandler = require('./commands/CommandHandler')
-const StateHandler = require('./handlers/StateHandler')
-const ErrorHandler = require('./handlers/ErrorHandler')
-const ChatHandler = require('./handlers/ChatHandler')
-const mineflayer = require('mineflayer')
-const chalk = require('chalk')
+const config = require("../../config.json");
+const CommunicationBridge = require("../contracts/CommunicationBridge");
+const StateHandler = require("./handlers/StateHandler");
+const ErrorHandler = require("./handlers/ErrorHandler");
+const ChatHandler = require("./handlers/ChatHandler");
+const mineflayer = require("mineflayer");
 
 class MinecraftManager extends CommunicationBridge {
   constructor(app) {
-    super()
+    super();
 
-    this.app = app
+    this.app = app;
 
-    this.stateHandler = new StateHandler(this)
-    this.errorHandler = new ErrorHandler(this)
-    this.chatHandler = new ChatHandler(this, new CommandHandler(this))
+    this.stateHandler = new StateHandler(this);
+    this.errorHandler = new ErrorHandler(this);
+    this.chatHandler = new ChatHandler(this);
   }
 
   connect() {
-    this.bot = this.createBotConnection()
+    this.bot = this.createBotConnection();
 
-    this.errorHandler.registerEvents(this.bot)
-    this.stateHandler.registerEvents(this.bot)
-    this.chatHandler.registerEvents(this.bot)
+    this.errorHandler.registerEvents(this.bot);
+    this.stateHandler.registerEvents(this.bot);
+    this.chatHandler.registerEvents(this.bot);
   }
 
   createBotConnection() {
     return mineflayer.createBot({
-      host: this.app.config.server.host,
-      port: this.app.config.server.port,
-      username: this.app.config.minecraft.username,
-      password: this.app.config.minecraft.password,
+      host: config.server.host,
+      port: config.server.port,
+      username: config.minecraft.username,
+      password: config.minecraft.password,
       version: false,
-      auth: this.app.config.minecraft.accountType,
-    })
+      auth: "mojang",
+    });
   }
 
-  onBroadcast({ username, message }) {
-    console.log(chalk.blue(`Minecraft Broadcast > ${username}: ${message}`))
+  onBroadcast({ username, message, reply }) {
+    console.log(`Minecraft Broadcast > ${username}: ${message}`);
 
     if (this.bot.player !== undefined) {
-      this.bot.chat(`/gc ${username}: ${message}`)
+      this.bot.chat(
+        `/gc ${reply ? `Replying to: ${reply}` : `${username}:`} ${message}`
+      );
     }
   }
 }
 
-module.exports = MinecraftManager
+module.exports = MinecraftManager;
