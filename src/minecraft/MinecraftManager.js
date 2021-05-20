@@ -1,9 +1,10 @@
-const config = require('../../config.json')
 const CommunicationBridge = require('../contracts/CommunicationBridge')
+const CommandHandler = require('./commands/CommandHandler')
 const StateHandler = require('./handlers/StateHandler')
 const ErrorHandler = require('./handlers/ErrorHandler')
 const ChatHandler = require('./handlers/ChatHandler')
 const mineflayer = require('mineflayer')
+const chalk = require('chalk')
 
 class MinecraftManager extends CommunicationBridge {
   constructor(app) {
@@ -13,7 +14,7 @@ class MinecraftManager extends CommunicationBridge {
 
     this.stateHandler = new StateHandler(this)
     this.errorHandler = new ErrorHandler(this)
-    this.chatHandler = new ChatHandler(this)
+    this.chatHandler = new ChatHandler(this, new CommandHandler(this))
   }
 
   connect() {
@@ -26,20 +27,21 @@ class MinecraftManager extends CommunicationBridge {
 
   createBotConnection() {
     return mineflayer.createBot({
-      host: config.server.host,
-      port: config.server.port,
-      username: config.minecraft.username,
-      password: config.minecraft.password,
+      host: this.app.config.server.host,
+      port: this.app.config.server.port,
+      username: this.app.config.minecraft.username,
+      password: this.app.config.minecraft.password,
       version: false,
-      auth: 'mojang',
+      auth: this.app.config.minecraft.accountType,
     })
   }
 
-  onBroadcast({ username, message, reply }) {
-    console.log(`Minecraft Broadcast > ${username}: ${message}`)
+  onBroadcast({ username, message, replyingTo }) {
+    console.log(chalk.blue(`Minecraft Broadcast > ${username}: ${message}`))
 
     if (this.bot.player !== undefined) {
-      this.bot.chat(`/gc ${reply ? `Replying to: ${reply}` : `${username}:`} ${message}`)
+      console.log(`/gc ${replyingTo ? `Replying to ${replyingTo}:` : `${username}:`} ${message}`)
+      this.bot.chat(`/gc ${replyingTo ? `Replying to ${replyingTo}:` : `${username}:`} ${message}`)
     }
   }
 }

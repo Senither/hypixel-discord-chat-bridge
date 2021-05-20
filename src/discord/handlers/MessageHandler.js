@@ -1,4 +1,3 @@
-const config = require('../../../config.json')
 class MessageHandler {
   constructor(discord, command) {
     this.discord = discord
@@ -19,21 +18,21 @@ class MessageHandler {
       return
     }
 
-    const isReply = await this.checkReply(message)
-
     this.discord.broadcastMessage({
       username: message.member.displayName,
       message: this.stripDiscordContent(message.content),
-      reply: isReply,
+      replyingTo: await this.fetchReply(message),
     })
   }
 
-  async checkReply(message) {
+  async fetchReply(message) {
     if (!message.reference) return null
 
-    const replyingTo = await message.channel.messages.fetch(message.reference.messageID)
+    const reference = await message.channel.messages.fetch(message.reference.messageID).catch(err => {
+      return null
+    })
 
-    return replyingTo.author.username
+    return reference.author.username
   }
 
   stripDiscordContent(message) {
@@ -51,7 +50,7 @@ class MessageHandler {
   }
 
   shouldBroadcastMessage(message) {
-    return !message.author.bot && message.channel.id == config.discord.channel && message.content && message.content.length > 0
+    return !message.author.bot && message.channel.id == this.discord.app.config.discord.channel && message.content && message.content.length > 0
   }
 }
 
