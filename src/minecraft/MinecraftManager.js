@@ -40,8 +40,7 @@ class MinecraftManager extends CommunicationBridge {
     console.log(chalk.blue(`Minecraft Broadcast > ${username}: ${message}`))
 
     if (this.bot.player !== undefined) {
-      console.log(`/gc ${replyingTo ? `Replying to ${replyingTo}:` : `${username}:`} ${message}`)
-      this.bot.chat(`/gc ${replyingTo ? `Replying to ${replyingTo}:` : `${username}:`} ${message}`)
+      this.bot.chat(`/gc ${replyingTo ? `${username} replying to ${replyingTo}:` : `${username}:`} ${message}`)
     }
   }
 }
