@@ -26,13 +26,15 @@ class MessageHandler {
   }
 
   async fetchReply(message) {
-    if (!message.reference) return null
+    try {
+      if (!message.reference) return null
 
-    const reference = await message.channel.messages.fetch(message.reference.messageID).catch(err => {
+      const reference = await message.channel.messages.fetch(message.reference.messageID)
+
+      return reference.author.username
+    } catch (e) {
       return null
-    })
-
-    return reference.author.username
+    }
   }
 
   stripDiscordContent(message) {
