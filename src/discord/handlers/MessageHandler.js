@@ -4,7 +4,7 @@ class MessageHandler {
     this.command = command
   }
 
-  onMessage(message) {
+  async onMessage(message) {
     if (!this.shouldBroadcastMessage(message)) {
       return
     }
@@ -21,7 +21,20 @@ class MessageHandler {
     this.discord.broadcastMessage({
       username: message.member.displayName,
       message: this.stripDiscordContent(message.content),
+      replyingTo: await this.fetchReply(message),
     })
+  }
+
+  async fetchReply(message) {
+    try {
+      if (!message.reference) return null
+
+      const reference = await message.channel.messages.fetch(message.reference.messageID)
+
+      return reference.author.username
+    } catch (e) {
+      return null
+    }
   }
 
   stripDiscordContent(message) {
