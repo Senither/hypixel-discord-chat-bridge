@@ -31,7 +31,7 @@ class MessageHandler {
 
       const reference = await message.channel.messages.fetch(message.reference.messageID)
 
-      return reference.member.displayName
+      return reference.member ? reference.member.displayName : reference.author.username
     } catch (e) {
       return null
     }
