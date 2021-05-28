@@ -31,7 +31,7 @@ class StateHandler {
           color: 'DC143C'
         }
       }).then(() => { process.exit() })
-    })
+    }).catch(process.exit())
   }
 }
 
