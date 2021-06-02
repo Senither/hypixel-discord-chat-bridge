@@ -6,7 +6,7 @@ class StateHandler {
   }
 
   async onReady() {
-    console.log(chalk.green('Discord client ready, logged in as ' + this.discord.client.user.tag))
+    this.discord.app.log.discord('Client ready, logged in as ' + this.discord.client.user.tag)
     this.discord.client.user.setActivity('Guild Chat', { type: 'WATCHING' })
 
     if (this.discord.app.config.discord.messageMode == 'webhook') {

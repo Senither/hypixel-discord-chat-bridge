@@ -4,6 +4,8 @@ const chalk = require('chalk')
 
 class CommandHandler {
   constructor(minecraft) {
+    this.minecraft = minecraft
+
     this.commands = [
       {
         trigger: ['!ping'],
@@ -33,7 +35,7 @@ class CommandHandler {
   }
 
   runCommand(command, player, message) {
-    console.log(chalk.grey(`Minecraft Command Handler > ${player} - [${command.handler.constructor.name}] ${message}`))
+    this.minecraft.app.log.minecraft(`${player} - [${command.handler.constructor.name}] ${message}`)
 
     command.handler.onCommand(player, message)
   }
