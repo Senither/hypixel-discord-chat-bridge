@@ -1,6 +1,5 @@
 const PingCommand = require('./PingCommand')
 const GuildLobbyCommand = require('./GuildLobbyCommand')
-const chalk = require('chalk')
 
 class CommandHandler {
   constructor(minecraft) {

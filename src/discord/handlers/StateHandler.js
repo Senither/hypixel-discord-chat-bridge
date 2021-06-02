@@ -1,5 +1,3 @@
-const chalk = require('chalk')
-
 class StateHandler {
   constructor(discord) {
     this.discord = discord

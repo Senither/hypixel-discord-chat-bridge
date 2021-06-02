@@ -7,8 +7,6 @@ const DemoteCommand = require(`./DemoteCommand`)
 const OverrideCommand = require(`./OverrideCommand`)
 const MuteCommand = require(`./MuteCommand`)
 
-const chalk = require('chalk')
-
 class CommandHandler {
   constructor(discord) {
     this.discord = discord

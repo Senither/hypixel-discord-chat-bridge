@@ -1,6 +1,4 @@
 const EventHandler = require('../../contracts/EventHandler')
-const CommandHandler = require('../commands/CommandHandler')
-const chalk = require('chalk')
 
 class StateHandler extends EventHandler {
   constructor(minecraft, command) {

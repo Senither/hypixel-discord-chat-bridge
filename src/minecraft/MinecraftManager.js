@@ -4,7 +4,6 @@ const StateHandler = require('./handlers/StateHandler')
 const ErrorHandler = require('./handlers/ErrorHandler')
 const ChatHandler = require('./handlers/ChatHandler')
 const mineflayer = require('mineflayer')
-const chalk = require('chalk')
 
 class MinecraftManager extends CommunicationBridge {
   constructor(app) {
