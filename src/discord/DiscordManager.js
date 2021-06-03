@@ -3,7 +3,6 @@ const StateHandler = require('./handlers/StateHandler')
 const MessageHandler = require('./handlers/MessageHandler')
 const CommandHandler = require('./commands/CommandHandler')
 const Discord = require('discord.js-light')
-const chalk = require('chalk')
 
 class DiscordManager extends CommunicationBridge {
   constructor(app) {
@@ -29,7 +28,7 @@ class DiscordManager extends CommunicationBridge {
     this.client.on('message', message => this.messageHandler.onMessage(message))
 
     this.client.login(this.app.config.discord.token).catch(error => {
-      console.error('Discord Bot Error: ', error)
+      this.app.log.error(error)
 
       process.exit(1)
     })
@@ -38,7 +37,7 @@ class DiscordManager extends CommunicationBridge {
   }
 
   onBroadcast({ username, message, guildRank }) {
-    console.log(chalk.blue(`Discord Broadcast > ${username} [${guildRank}]: ${message}`))
+    this.app.log.broadcast(`${username} [${guildRank}]: ${message}`, `Discord`)
     switch (this.app.config.discord.messageMode.toLowerCase()) {
       case 'bot':
         this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
@@ -72,7 +71,7 @@ class DiscordManager extends CommunicationBridge {
   }
 
   onLogin(username) {
-    console.log(chalk.blue(`Discord Broadcast > ${username} joined`))
+    this.app.log.broadcast(`${username} joined.`, `Discord`)
     switch (this.app.config.discord.messageMode.toLowerCase()) {
       case 'bot':
         this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
@@ -106,7 +105,7 @@ class DiscordManager extends CommunicationBridge {
   }
 
   onLogout(username) {
-    console.log(chalk.blue(`Discord Broadcast > ${username} left`))
+    this.app.log.broadcast(`${username} left.`, `Discord`)
     switch (this.app.config.discord.messageMode.toLowerCase()) {
       case 'bot':
         this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {

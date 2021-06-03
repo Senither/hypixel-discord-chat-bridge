@@ -1,5 +1,4 @@
 const EventHandler = require('../../contracts/EventHandler')
-const chalk = require('chalk')
 
 class StateHandler extends EventHandler {
   constructor(minecraft) {
@@ -19,7 +18,7 @@ class StateHandler extends EventHandler {
   }
 
   onLogin() {
-    console.log(chalk.green('Minecraft client ready, logged in as ' + this.bot.username))
+    this.minecraft.app.log.minecraft('Client ready, logged in as ' + this.bot.username)
 
     this.loginAttempts = 0
     this.exactDelay = 0
@@ -35,14 +34,13 @@ class StateHandler extends EventHandler {
       }
     }
 
-    console.log(chalk.red(`Minecraft bot disconnected from server, attempting reconnect in ${loginDelay / 1000} seconds`))
+    this.minecraft.app.log.warn(`Minecraft bot disconnected from server, attempting reconnect in ${loginDelay / 1000} seconds`)
 
     setTimeout(() => this.minecraft.connect(), loginDelay)
   }
 
   onKicked(reason) {
-    console.log(chalk.red(reason))
-    console.log(chalk.red(`Minecraft bot was kicked from server for "${reason}"`))
+    this.minecraft.app.log.warn(`Minecraft bot was kicked from server for "${reason}"`)
 
     this.loginAttempts++
   }

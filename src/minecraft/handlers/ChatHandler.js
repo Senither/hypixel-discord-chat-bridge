@@ -1,6 +1,4 @@
 const EventHandler = require('../../contracts/EventHandler')
-const CommandHandler = require('../commands/CommandHandler')
-const chalk = require('chalk')
 
 class StateHandler extends EventHandler {
   constructor(minecraft, command) {
@@ -20,7 +18,7 @@ class StateHandler extends EventHandler {
     const message = event.toString().trim()
 
     if (this.isLobbyJoinMessage(message)) {
-      console.log(chalk.yellow('Sending Minecraft client to limbo'))
+      this.minecraft.app.log.minecraft('Sending Minecraft client to limbo')
       return this.bot.chat('/ac §')
     }
 
