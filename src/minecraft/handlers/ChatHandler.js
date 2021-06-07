@@ -55,9 +55,15 @@ class StateHandler extends EventHandler {
     }
 
     const playerMessage = parts.join(':').trim()
-    if (this.command.handle(username, playerMessage)) {
+    if (playerMessage.length == 0 || this.command.handle(username, playerMessage)) {
       return
     }
+
+    if (playerMessage == '@') {
+      return
+    }
+
+    console.log(playerMessage)
 
     this.minecraft.broadcastMessage({
       username: username,
