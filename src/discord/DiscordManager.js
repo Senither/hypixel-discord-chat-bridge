@@ -137,6 +137,28 @@ class DiscordManager extends CommunicationBridge {
         throw new Error('Invalid message mode: must be bot or webhook')
     }
   }
+  
+  onEventLog(message) {
+    if (!this.app.config.discord.guildeventlog) {
+      return
+    }
+    this.app.log.broadcast(`${message}`, `Event Log`)
+    this.app.discord.client.channels.fetch(this.app.config.discord.channellog).then(channel => {
+      channel.send({
+        embed: {
+          description: message,
+          color: 'FEE6A8',
+          timestamp: new Date(),
+          footer: {
+            text: "Event was on",
+          },
+          author: {
+            name: "Guild Event Log",
+          },
+        },
+      })
+    })
+  }
 }
 
 module.exports = DiscordManager
