@@ -37,7 +37,7 @@ class StateHandler extends EventHandler {
     if ((this.isLogEventMessage1(message) || this.isLogEventMessage2(message) || this.isLogEventMessage3(message)) && !this.isGuildMessage(message)) {
       let msg = message.replace(/(\[[A-z\+]+\])+? /gm, "")
 
-      this.minecraft.broadcastLogEvent(msg)
+      this.minecraft.broadcastEventLog(msg)
       return
     }
 
