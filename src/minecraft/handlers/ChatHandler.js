@@ -33,6 +33,13 @@ class StateHandler extends EventHandler {
 
       return this.minecraft.broadcastLogout(user)
     }
+    
+    if ((this.isLogEventMessage1(message) || this.isLogEventMessage2(message) || this.isLogEventMessage3(message)) && !this.isGuildMessage(message)) {
+      let msg = message.replace(/(\[[A-z\+]+\])+? /gm, "")
+
+      this.minecraft.broadcastLogEvent(msg)
+      return
+    }
 
     if (!this.isGuildMessage(message)) {
       return
@@ -90,6 +97,18 @@ class StateHandler extends EventHandler {
 
   isLogoutMessage(message) {
     return message.startsWith('Guild >') && message.endsWith('left.') && !message.includes(':')
+  }
+  
+  isLogEventMessage1(message) {
+    return message.endsWith(" joined the guild!") || message.endsWith(" left the guild!") || (message.includes(" was kicked from the guild by ") && message.endsWith('!'))
+  }
+
+  isLogEventMessage2(message) {
+    return (message.includes(" has muted ") && message.includes(" for ")) || message.includes(" has unmuted ")
+  }
+
+  isLogEventMessage3(message) {
+    return (message.includes(" was promoted from ") || message.includes(" was demoted from ")) && message.includes(" to ")
   }
 }
 
