@@ -25,13 +25,131 @@ class StateHandler extends EventHandler {
     if (this.isLoginMessage(message)) {
       let user = message.split('>')[1].trim().split('joined.')[0].trim()
 
-      return this.minecraft.broadcastLogin(user)
+      return this.minecraft.broadcastPlayerToggle({ username: user, message: `joined.`, color: '47F049' })
     }
 
     if (this.isLogoutMessage(message)) {
       let user = message.split('>')[1].trim().split('left.')[0].trim()
 
-      return this.minecraft.broadcastLogout(user)
+      return this.minecraft.broadcastPlayerToggle({ username: user, message: `left.`, color: 'F04947' })
+    }
+
+    if (this.isJoinMessage(message)) {
+      let user = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[0]
+
+      return this.minecraft.broadcastHeadedEmbed({
+        message: `${user} joined the guild!`,
+        title: `Member Joined`,
+        icon: `https://mc-heads.net/avatar/${user}`,
+        color: '47F049'
+      })
+    }
+
+    if (this.isLeaveMessage(message)) {
+      let user = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[0]
+
+      return this.minecraft.broadcastHeadedEmbed({
+        message: `${user} left the guild!`,
+        title: `Member Left`,
+        icon: `https://mc-heads.net/avatar/${user}`,
+        color: 'F04947'
+      })
+    }
+
+    if (this.isKickMessage(message)) {
+      let user = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[0]
+
+      return this.minecraft.broadcastHeadedEmbed({
+        message: `${user} was kicked from the guild!`,
+        title: `Member Kicked`,
+        icon: `https://mc-heads.net/avatar/${user}`,
+        color: 'F04947'
+      })
+    }
+
+    if (this.isPromotionMessage(message)) {
+      let username = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[0]
+      let newRank = message.replace(/\[(.*?)\]/g, '').trim().split(' to ').pop().trim()
+
+      return this.minecraft.broadcastCleanEmbed({ message: `${username} was promoted to ${newRank}`, color: '47F049' })
+    }
+
+    if (this.isDemotionMessage(message)) {
+      let username = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[0]
+      let newRank = message.replace(/\[(.*?)\]/g, '').trim().split(' to ').pop().trim()
+
+      return this.minecraft.broadcastCleanEmbed({ message: `${username} was demoted to ${newRank}`, color: 'F04947' })
+    }
+
+    if (this.isBlockedMessage(message)) {
+      let blockedMsg = message.match(/".+"/g)[0].slice(1, -1)
+
+      return this.minecraft.broadcastCleanEmbed({ message: `Message \`${blockedMsg}\` blocked by Hypixel.`, color: 'DC143C' })
+    }
+
+    if (this.isRepeatMessage(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: `You cannot say the same message twice!`, color: 'DC143C' })
+    }
+
+    if (this.isNoPermission(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: `I don't have permission to do that!`, color: 'DC143C' })
+    }
+
+    if (this.isIncorrectUsage(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: message.split("'").join("`"), color: 'DC143C' })
+    }
+
+    if (this.isOnlineInvite(message)) {
+      let user = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[2]
+
+      return this.minecraft.broadcastCleanEmbed({ message: `${user} was invited to the guild!`, color: '47F049' })
+    }
+
+    if (this.isOfflineInvite(message)) {
+      let user = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[6].match(/\w+/g)[0]
+
+      return this.minecraft.broadcastCleanEmbed({ message: `${user} was offline invited to the guild!`, color: '47F049' })
+    }
+
+    if (this.isFailedInvite(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: message.replace(/\[(.*?)\]/g, '').trim(), color: 'DC143C' })
+    }
+
+    if (this.isGuildMuteMessage(message)) {
+      let time = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[7]
+
+      return this.minecraft.broadcastCleanEmbed({ message: `Guild Chat has been muted for ${time}`, color: 'F04947' })
+    }
+
+    if (this.isGuildUnmuteMessage(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: `Guild Chat has been unmuted!`, color: '47F049' })
+    }
+
+    if (this.isUserMuteMessage(message)) {
+      let user = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[3].replace(/[^\w]+/g, '')
+      let time = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[5]
+
+      return this.minecraft.broadcastCleanEmbed({ message: `${user} has been muted for ${time}`, color: 'F04947' })
+    }
+
+    if (this.isUserUnmuteMessage(message)) {
+      let user = message.replace(/\[(.*?)\]/g, '').trim().split(/ +/g)[3]
+
+      return this.minecraft.broadcastCleanEmbed({ message: `${user} has been unmuted!`, color: '47F049' })
+    }
+
+    if (this.isSetrankFail(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: `Rank not found.`, color: 'DC143C' })
+    }
+
+    if (this.isAlreadyMuted(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: `This user is already muted!`, color: 'DC143C' })
+    }
+
+    if (this.isNotInGuild(message)) {
+      let user = message.replace(/\[(.*?)\]/g, '').trim().split(' ')[0]
+
+      return this.minecraft.broadcastCleanEmbed({ message: `${user} is not in the guild.`, color: 'DC143C' })
     }
 
     if (!this.isGuildMessage(message)) {
@@ -90,6 +208,82 @@ class StateHandler extends EventHandler {
 
   isLogoutMessage(message) {
     return message.startsWith('Guild >') && message.endsWith('left.') && !message.includes(':')
+  }
+
+  isJoinMessage(message) {
+    return message.endsWith('joined the guild!') && !message.includes(':')
+  }
+
+  isLeaveMessage(message) {
+    return message.endsWith('left the guild!') && !message.includes(':')
+  }
+
+  isKickMessage(message) {
+    return message.includes('was kicked from the guild by') && message.endsWith('!') && !message.includes(':')
+  }
+
+  isPromotionMessage(message) {
+    return message.includes('was promoted from') && !message.includes(':')
+  }
+
+  isDemotionMessage(message) {
+    return message.includes('was demoted from') && !message.includes(':')
+  }
+
+  isBlockedMessage(message) {
+    return message.startsWith('We blocked your comment')
+  }
+
+  isRepeatMessage(message) {
+    return message == 'You cannot say the same message twice!'
+  }
+
+  isNoPermission(message) {
+    return message == 'You must be the Guild Master to use that command!' || message == 'You do not have permission to use this command!' || message == "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error." || message == "You cannot mute the guild master!" || message == "You cannot kick this player!" || message == "You can only promote up to your own rank!"
+  }
+
+  isIncorrectUsage(message) {
+    return message.startsWith('Invalid usage!')
+  }
+
+  isOnlineInvite(message) {
+    return message.startsWith('You invited') && message.endsWith('to your guild. They have 5 minutes to accept.')
+  }
+
+  isOfflineInvite(message) {
+    return message.startsWith('You sent an offline invite to') && message.endsWith('They will have 5 minutes to accept once they come online!')
+  }
+
+  isFailedInvite(message) {
+    return (message.endsWith('is already in another guild!') && !message.includes(':')) || message == 'You cannot invite this player to your guild!' || (message.startsWith("You've already invited") && message.endsWith("to your guild! Wait for them to accept!") || message.endsWith('is already in your guild!'))
+  }
+
+  isUserMuteMessage(message) {
+    return message.includes('has muted') && message.includes('for') && !message.includes(':')
+  }
+
+  isUserUnmuteMessage(message) {
+    return message.includes('has unmuted') && !message.includes(':')
+  }
+
+  isGuildMuteMessage(message) {
+    return message.includes('has muted the guild chat for') && !message.includes(':')
+  }
+
+  isGuildUnmuteMessage(message) {
+    return message.endsWith('has unmuted the guild chat!') && !message.includes(':')
+  }
+
+  isSetrankFail(message) {
+    return message.startsWith("I couldn't find a rank by the name of ")
+  }
+
+  isAlreadyMuted(message) {
+    return message == 'This player is already muted!'
+  }
+
+  isNotInGuild(message) {
+    return message.endsWith(' is not in your guild!')
   }
 }
 
