@@ -22,6 +22,10 @@ class CommunicationBridge {
   broadcastLogout(event) {
     return this.bridge.onLogout(event)
   }
+  
+  broadcastEventLog(event) {
+    return this.bridge.onEventLog(event)
+  }
 
   connect() {
     throw new Error('Communication bridge connection is not implemented yet!')
