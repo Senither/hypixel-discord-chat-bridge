@@ -139,11 +139,11 @@ class DiscordManager extends CommunicationBridge {
   }
   
   onEventLog(message) {
-    if (!this.app.config.discord.guildeventlog) {
+    if (!this.app.config.discord.eventLog) {
       return
     }
     this.app.log.broadcast(`${message}`, `Event Log`)
-    this.app.discord.client.channels.fetch(this.app.config.discord.channellog).then(channel => {
+    this.app.discord.client.channels.fetch(this.app.config.discord.channelLog).then(channel => {
       channel.send({
         embed: {
           description: message,
