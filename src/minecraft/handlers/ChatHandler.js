@@ -181,8 +181,6 @@ class StateHandler extends EventHandler {
       return
     }
 
-    console.log(playerMessage)
-
     this.minecraft.broadcastMessage({
       username: username,
       message: playerMessage,
