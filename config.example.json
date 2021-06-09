@@ -17,6 +17,6 @@
     "ownerId": "ownerId",
     "prefix": "!",
     "messageMode": "bot",
-    "eventLog": false
+    "eventLog": true
   }
 }
