@@ -12,11 +12,11 @@
   "discord": {
     "token": "discordBotToken",
     "channel": "channelId",
-    "channellog": "channelIdlog",
+    "channelLog": "channelIdlog",
     "commandRole": "roleId",
     "ownerId": "ownerId",
     "prefix": "!",
     "messageMode": "bot",
-    "guildeventlog": false
+    "eventLog": false
   }
 }
