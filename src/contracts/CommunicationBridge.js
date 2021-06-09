@@ -15,12 +15,16 @@ class CommunicationBridge {
     return this.bridge.onBroadcast(event)
   }
 
-  broadcastLogin(event) {
-    return this.bridge.onLogin(event)
+  broadcastPlayerToggle(event) {
+    return this.bridge.onPlayerToggle(event)
   }
 
-  broadcastLogout(event) {
-    return this.bridge.onLogout(event)
+  broadcastCleanEmbed(event) {
+    return this.bridge.onBroadcastCleanEmbed(event)
+  }
+
+  broadcastHeadedEmbed(event) {
+    return this.bridge.onBroadcastHeadedEmbed(event)
   }
 
   connect() {

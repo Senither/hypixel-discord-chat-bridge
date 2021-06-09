@@ -70,51 +70,48 @@ class DiscordManager extends CommunicationBridge {
     }
   }
 
-  onLogin(username) {
-    this.app.log.broadcast(`${username} joined.`, `Discord`)
-    switch (this.app.config.discord.messageMode.toLowerCase()) {
-      case 'bot':
-        this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
-          channel.send({
-            embed: {
-              color: '7CFC00',
-              timestamp: new Date(),
-              author: {
-                name: `${username} joined.`,
-                icon_url: 'https://www.mc-heads.net/avatar/' + username,
-              },
-            }
-          })
-        })
-        break
+  onBroadcastCleanEmbed({ message, color }) {
+    this.app.log.broadcast(message, 'Event')
 
-      case 'webhook':
-        this.app.discord.webhook.send({
-          username: username, avatarURL: 'https://www.mc-heads.net/avatar/' + username, embeds: [{
-            color: '7CFC00',
-            author: {
-              name: `${username} joined.`,
-            },
-          }]
-        })
-        break
-
-      default:
-        throw new Error('Invalid message mode: must be bot or webhook')
-    }
+    this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
+      channel.send({
+        embed: {
+          color: color,
+          description: message,
+        }
+      })
+    })
   }
 
-  onLogout(username) {
-    this.app.log.broadcast(`${username} left.`, `Discord`)
+  onBroadcastHeadedEmbed({ message, title, icon, color }) {
+    this.app.log.broadcast(message, 'Event')
+
+    this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
+      channel.send({
+        embed: {
+          color: color,
+          author: {
+            name: title,
+            icon_url: icon,
+          },
+          description: message,
+        }
+      })
+    })
+  }
+
+  onPlayerToggle({ username, message, color }) {
+    this.app.log.broadcast(username + ' ' + message, 'Event')
+
     switch (this.app.config.discord.messageMode.toLowerCase()) {
       case 'bot':
         this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
           channel.send({
             embed: {
-              color: 'DC143C',
+              color: color,
               timestamp: new Date(),
               author: {
-                name: `${username} left.`,
+                name: `${username} ${message}`,
                 icon_url: 'https://www.mc-heads.net/avatar/' + username,
               },
             }
@@ -125,10 +122,8 @@ class DiscordManager extends CommunicationBridge {
       case 'webhook':
         this.app.discord.webhook.send({
           username: username, avatarURL: 'https://www.mc-heads.net/avatar/' + username, embeds: [{
-            color: 'DC143C',
-            author: {
-              name: `${username} left.`,
-            },
+            color: color,
+            description: `${username} ${message}`,
           }]
         })
         break
