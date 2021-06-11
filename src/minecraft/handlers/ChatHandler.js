@@ -152,6 +152,10 @@ class StateHandler extends EventHandler {
       return this.minecraft.broadcastCleanEmbed({ message: `${user} is not in the guild.`, color: 'DC143C' })
     }
 
+    if (this.isLowestRank(message) || this.isAlreadyHasRank(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: message.replace(/\[(.*?)\]/g, ''), color: 'DC143C' })
+    }
+
     if (!this.isGuildMessage(message)) {
       return
     }
@@ -237,7 +241,7 @@ class StateHandler extends EventHandler {
   }
 
   isNoPermission(message) {
-    return message == 'You must be the Guild Master to use that command!' || message == 'You do not have permission to use this command!' || message == "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error." || message == "You cannot mute the guild master!" || message == "You cannot kick this player!" || message == "You can only promote up to your own rank!"
+    return message == 'You must be the Guild Master to use that command!' || message == 'You do not have permission to use this command!' || message == "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error." || message == "You cannot mute the guild master!" || message == "You cannot kick this player!" || message == "You can only promote up to your own rank!" || message == "You cannot mute yourself from the guild!" || (message.endsWith("is the guild master so can't be demoted!") && !message.includes(":")) || (message.endsWith("is the guild master so can't be promoted anymore!") && !message.includes(":"))
   }
 
   isIncorrectUsage(message) {
@@ -281,7 +285,15 @@ class StateHandler extends EventHandler {
   }
 
   isNotInGuild(message) {
-    return message.endsWith(' is not in your guild!')
+    return message.endsWith(' is not in your guild!') && !message.includes(':')
+  }
+
+  isLowestRank(message) {
+    return message.endsWith("is already the lowest rank you've created!") && !message.includes(':')
+  }
+
+  isAlreadyHasRank(message) {
+    return message == 'They already have that rank!'
   }
 }
 
