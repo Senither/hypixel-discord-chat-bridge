@@ -164,6 +164,12 @@ class StateHandler extends EventHandler {
       return this.minecraft.app.log.warn(message)
     }
 
+    if (this.isPlayerNotFound(message)) {
+      let user = message.split(' ')[8].slice(1, -1)
+
+      return this.minecraft.broadcastCleanEmbed({ message: `Player \`${user}\` not found.`, color: 'DC143C' })
+    }
+
     if (!this.isGuildMessage(message)) {
       return
     }
@@ -306,6 +312,10 @@ class StateHandler extends EventHandler {
 
   isTooFast(message) {
     return message.includes('You are sending commands too fast! Please slow down.') && !message.includes(':')
+  }
+
+  isPlayerNotFound(message) {
+    return message.startsWith(`Can't find a player by the name of`)
   }
 }
 
