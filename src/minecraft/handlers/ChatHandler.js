@@ -249,7 +249,7 @@ class StateHandler extends EventHandler {
   }
 
   isBlockedMessage(message) {
-    return message.includes('We blocked your comment') && message.includes(':')
+    return message.includes('We blocked your comment') && !message.includes(':')
   }
 
   isRepeatMessage(message) {
@@ -261,11 +261,11 @@ class StateHandler extends EventHandler {
   }
 
   isIncorrectUsage(message) {
-    return message.includes('Invalid usage!') && message.includes(':')
+    return message.includes('Invalid usage!') && !message.includes(':')
   }
 
   isOnlineInvite(message) {
-    return message.includes('You invited') && message.includes('to your guild. They have 5 minutes to accept.') && message.includes(':')
+    return message.includes('You invited') && message.includes('to your guild. They have 5 minutes to accept.') && !message.includes(':')
   }
 
   isOfflineInvite(message) {
