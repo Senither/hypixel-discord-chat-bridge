@@ -245,7 +245,7 @@ class StateHandler extends EventHandler {
   }
 
   isNoPermission(message) {
-    return message == 'You must be the Guild Master to use that command!' || message == 'You do not have permission to use this command!' || message == "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error." || message == "You cannot mute the guild master!" || message == "You cannot kick this player!" || message == "You can only promote up to your own rank!" || message == "You cannot mute yourself from the guild!" || (message.endsWith("is the guild master so can't be demoted!") && !message.includes(":")) || (message.endsWith("is the guild master so can't be promoted anymore!") && !message.includes(":"))
+    return (message.includes('You must be the Guild Master to use that command!') || message.includes('You do not have permission to use this command!') || message.includes("I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.") || message.includes("You cannot mute a guild member with a higher guild rank!") || message.includes("You cannot kick this player!") || message.includes("You can only promote up to your own rank!") || message.includes("You cannot mute yourself from the guild!") || message.includes("is the guild master so can't be demoted!") || message.includes("is the guild master so can't be promoted anymore!")) && !message.includes(":")
   }
 
   isIncorrectUsage(message) {
@@ -285,7 +285,7 @@ class StateHandler extends EventHandler {
   }
 
   isAlreadyMuted(message) {
-    return message == 'This player is already muted!'
+    return message.includes('This player is already muted!') && !message.includes(':')
   }
 
   isNotInGuild(message) {
@@ -297,11 +297,11 @@ class StateHandler extends EventHandler {
   }
 
   isAlreadyHasRank(message) {
-    return message == 'They already have that rank!'
+    return message.includes('They already have that rank!') && !message.includes(':')
   }
 
   isTooFast(message) {
-    return message == 'You are sending commands too fast! Please slow down.'
+    return message.includes('You are sending commands too fast! Please slow down.') && !message.includes(':')
   }
 }
 
