@@ -152,8 +152,12 @@ class StateHandler extends EventHandler {
       return this.minecraft.broadcastCleanEmbed({ message: `${user} is not in the guild.`, color: 'DC143C' })
     }
 
-    if (this.isLowestRank(message) || this.isAlreadyHasRank(message)) {
-      return this.minecraft.broadcastCleanEmbed({ message: message.replace(/\[(.*?)\]/g, ''), color: 'DC143C' })
+    if (this.isLowestRank(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: message.replace(/\[(.*?)\]/g, '').trim().split(' ')[0], color: 'DC143C' })
+    }
+
+    if (this.isAlreadyHasRank(message)) {
+      return this.minecraft.broadcastCleanEmbed({ message: `They already have that rank!`, color: 'DC143C' })
     }
 
     if (this.isTooFast(message)) {
@@ -293,7 +297,7 @@ class StateHandler extends EventHandler {
   }
 
   isLowestRank(message) {
-    return message.endsWith("is already the lowest rank you've created!") && !message.includes(':')
+    return message.includes("is already the lowest rank you've created!") && !message.includes(':')
   }
 
   isAlreadyHasRank(message) {
