@@ -156,6 +156,10 @@ class StateHandler extends EventHandler {
       return this.minecraft.broadcastCleanEmbed({ message: message.replace(/\[(.*?)\]/g, ''), color: 'DC143C' })
     }
 
+    if (this.isTooFast(message)) {
+      return this.minecraft.app.log.warn(message)
+    }
+
     if (!this.isGuildMessage(message)) {
       return
     }
@@ -294,6 +298,10 @@ class StateHandler extends EventHandler {
 
   isAlreadyHasRank(message) {
     return message == 'They already have that rank!'
+  }
+
+  isTooFast(message) {
+    return message == 'You are sending commands too fast! Please slow down.'
   }
 }
 
