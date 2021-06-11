@@ -153,7 +153,9 @@ class StateHandler extends EventHandler {
     }
 
     if (this.isLowestRank(message)) {
-      return this.minecraft.broadcastCleanEmbed({ message: message.replace(/\[(.*?)\]/g, '').trim().split(' ')[0], color: 'DC143C' })
+      let user = message.replace(/\[(.*?)\]/g, '').trim().split(' ')[0]
+
+      return this.minecraft.broadcastCleanEmbed({ message: `${user} is already the lowest guild rank!`, color: 'DC143C' })
     }
 
     if (this.isAlreadyHasRank(message)) {
