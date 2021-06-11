@@ -221,15 +221,15 @@ class StateHandler extends EventHandler {
   }
 
   isJoinMessage(message) {
-    return message.endsWith('joined the guild!') && !message.includes(':')
+    return message.includes('joined the guild!') && !message.includes(':')
   }
 
   isLeaveMessage(message) {
-    return message.endsWith('left the guild!') && !message.includes(':')
+    return message.includes('left the guild!') && !message.includes(':')
   }
 
   isKickMessage(message) {
-    return message.includes('was kicked from the guild by') && message.endsWith('!') && !message.includes(':')
+    return message.includes('was kicked from the guild by') && !message.includes(':')
   }
 
   isPromotionMessage(message) {
@@ -241,7 +241,7 @@ class StateHandler extends EventHandler {
   }
 
   isBlockedMessage(message) {
-    return message.startsWith('We blocked your comment')
+    return message.includes('We blocked your comment') && message.includes(':')
   }
 
   isRepeatMessage(message) {
@@ -253,19 +253,19 @@ class StateHandler extends EventHandler {
   }
 
   isIncorrectUsage(message) {
-    return message.startsWith('Invalid usage!')
+    return message.includes('Invalid usage!') && message.includes(':')
   }
 
   isOnlineInvite(message) {
-    return message.startsWith('You invited') && message.endsWith('to your guild. They have 5 minutes to accept.')
+    return message.includes('You invited') && message.includes('to your guild. They have 5 minutes to accept.') && message.includes(':')
   }
 
   isOfflineInvite(message) {
-    return message.startsWith('You sent an offline invite to') && message.endsWith('They will have 5 minutes to accept once they come online!')
+    return message.includes('You sent an offline invite to') && message.includes('They will have 5 minutes to accept once they come online!') && !message.includes(':')
   }
 
   isFailedInvite(message) {
-    return (message.endsWith('is already in another guild!') && !message.includes(':')) || message == 'You cannot invite this player to your guild!' || (message.startsWith("You've already invited") && message.endsWith("to your guild! Wait for them to accept!") || message.endsWith('is already in your guild!'))
+    return (message.includes('is already in another guild!') || message.includes('You cannot invite this player to your guild!') || (message.includes("You've already invited") && message.includes("to your guild! Wait for them to accept!")) || message.includes('is already in your guild!')) && !message.includes(':')
   }
 
   isUserMuteMessage(message) {
@@ -281,11 +281,11 @@ class StateHandler extends EventHandler {
   }
 
   isGuildUnmuteMessage(message) {
-    return message.endsWith('has unmuted the guild chat!') && !message.includes(':')
+    return message.includes('has unmuted the guild chat!') && !message.includes(':')
   }
 
   isSetrankFail(message) {
-    return message.startsWith("I couldn't find a rank by the name of ")
+    return message.includes("I couldn't find a rank by the name of ") && !message.includes(':')
   }
 
   isAlreadyMuted(message) {
@@ -293,7 +293,7 @@ class StateHandler extends EventHandler {
   }
 
   isNotInGuild(message) {
-    return message.endsWith(' is not in your guild!') && !message.includes(':')
+    return message.includes(' is not in your guild!') && !message.includes(':')
   }
 
   isLowestRank(message) {
