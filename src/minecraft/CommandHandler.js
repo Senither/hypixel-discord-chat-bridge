@@ -17,7 +17,7 @@ class CommandHandler {
 
   handle(player, message) {
     if (!message.startsWith(this.prefix)) { return false }
-    let args = message.slice(prefix.length).trim().split(/ +/);
+    let args = message.slice(this.prefix.length).trim().split(/ +/);
     let commandName = args.shift().toLowerCase();
 
     let command = this.commands.get(commandName)
@@ -25,7 +25,7 @@ class CommandHandler {
 
     if (!command) return false;
 
-    this.minecraft.app.log.minecraft(`${player} - [${command.handler.constructor.name}] ${message}`)
+    this.minecraft.app.log.minecraft(`${player} - [${command.name}] ${message}`)
     command.onCommand(player, message)
 
     return true
