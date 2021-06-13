@@ -4,8 +4,9 @@ class GuildLobbyCommand extends MinecraftCommand {
   constructor(minecraft) {
     super(minecraft)
 
-    this.name = 'GuildLobby'
+    this.name = 'guildlobby'
     this.aliases = ['globby']
+    this.description = "Whispers user's username to a guild lobby account"
   }
 
   onCommand(username, message) {

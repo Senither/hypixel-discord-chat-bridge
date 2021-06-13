@@ -6,6 +6,7 @@ class PingCommand extends MinecraftCommand {
 
     this.name = 'ping'
     this.aliases = []
+    this.description = 'Replies with `Pong!` to the user'
   }
 
   onCommand(username, message) {

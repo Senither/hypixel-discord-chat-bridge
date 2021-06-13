@@ -9,14 +9,19 @@ class HelpCommand extends DiscordCommand {
 
     this.name = 'help'
     this.aliases = ['h', 'info']
-    this.description = 'Shows the help menu'
+    this.description = 'Shows this help menu'
   }
 
   onCommand(message) {
     let discordCommands = []
+    let minecraftCommands = []
 
     this.discord.messageHandler.command.commands.forEach(command => {
       discordCommands.push(`\`${command.name}\`: ${command.description}`)
+    });
+
+    this.discord.app.minecraft.chatHandler.command.commands.forEach(command => {
+      minecraftCommands.push(`\`${command.name}\`: ${command.description}`)
     });
 
     message.channel.send({
@@ -25,8 +30,12 @@ class HelpCommand extends DiscordCommand {
         description: ['`< >` = Required arguments', '`[ ]` = Optional arguments'].join('\n'),
         fields: [
           {
-            name: 'Commands',
+            name: 'Discord Commands',
             value: discordCommands.join('\n')
+          },
+          {
+            name: 'Minecraft Commands',
+            value: minecraftCommands.join('\n')
           },
           {
             name: `Info`,
@@ -45,12 +54,7 @@ class HelpCommand extends DiscordCommand {
         timestamp: new Date()
       }
     }).then(helpMessage => {
-      setTimeout(() => {
-        helpMessage.delete()
-        if (message.deletable) {
-          message.delete()
-        }
-      }, 30000)
+      helpMessage.delete({ timeout: 30000 })
     })
   }
 }
