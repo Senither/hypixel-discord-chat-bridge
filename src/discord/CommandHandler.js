@@ -25,11 +25,27 @@ class CommandHandler {
 
     if (!command) return false;
 
-    this.discord.app.log.discord(`[${command.name}] ${message.content}`)
-
-    command.onCommand(message)
+    if ((command.name != 'help' && !this.isCommander(message.member)) || (command.name == 'override' && !this.isOwner(message.author))) {
+      message.channel.send({
+        embed: {
+          description: `You don't have permission to do that.`,
+          color: 'DC143C'
+        }
+      })
+    } else {
+      this.discord.app.log.discord(`[${command.name}] ${message.content}`)
+      command.onCommand(message)
+    }
 
     return true
+  }
+
+  isCommander(member) {
+    return member.roles.cache.find(r => r.id == this.discord.app.config.discord.commandRole)
+  }
+
+  isOwner(member) {
+    return member.id == this.discord.app.config.discord.ownerId
   }
 }
 
