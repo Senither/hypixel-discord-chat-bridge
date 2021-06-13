@@ -7,6 +7,9 @@ class HelpCommand extends DiscordCommand {
   constructor(discord) {
     super(discord)
 
+    this.name = 'help'
+    this.aliases = ['h', 'info']
+
     const prefix = this.discord.app.config.discord.prefix
 
     this.helpEmbed = new Discord.MessageEmbed()

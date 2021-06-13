@@ -1,6 +1,13 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class OverrideCommand extends DiscordCommand {
+  constructor() {
+    super()
+    
+    this.name = 'override'
+    this.aliases = ['o']
+  }
+
   onCommand(message) {
     let args = this.getArgs(message).join(' ')
 

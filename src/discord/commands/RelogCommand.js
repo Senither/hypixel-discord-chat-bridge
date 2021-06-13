@@ -1,6 +1,13 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class RelogCommand extends DiscordCommand {
+  constructor() {
+    super()
+
+    this.name = 'relog'
+    this.aliases = ['r']
+  }
+
   onCommand(message) {
     let args = this.getArgs(message)
 

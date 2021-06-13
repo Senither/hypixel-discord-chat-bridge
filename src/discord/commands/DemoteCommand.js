@@ -1,6 +1,13 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class DemoteCommand extends DiscordCommand {
+  constructor() {
+    super()
+    
+    this.name = 'demote'
+    this.aliases = ['down', 'd']
+  }
+
   onCommand(message) {
     let args = this.getArgs(message)
     let user = args.shift()
