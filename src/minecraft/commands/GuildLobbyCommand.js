@@ -1,8 +1,8 @@
 const MinecraftCommand = require('../../contracts/MinecraftCommand')
 
 class GuildLobbyCommand extends MinecraftCommand {
-  constructor() {
-    super()
+  constructor(minecraft) {
+    super(minecraft)
 
     this.name = 'GuildLobby'
     this.aliases = ['globby']

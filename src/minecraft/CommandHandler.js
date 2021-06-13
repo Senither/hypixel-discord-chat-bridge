@@ -26,12 +26,7 @@ class CommandHandler {
     if (!command) return false;
 
     this.minecraft.app.log.minecraft(`${player} - [${command.handler.constructor.name}] ${message}`)
-
-    try {
-      command.onCommand(player, message)
-    } catch (e) {
-      this.minecraft.app.log.warn(e)
-    }
+    command.onCommand(player, message)
 
     return true
   }

@@ -1,8 +1,8 @@
 const MinecraftCommand = require('../../contracts/MinecraftCommand')
 
 class PingCommand extends MinecraftCommand {
-  constructor() {
-    super()
+  constructor(minecraft) {
+    super(minecraft)
 
     this.name = 'ping'
     this.aliases = []
