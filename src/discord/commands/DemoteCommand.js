@@ -2,7 +2,7 @@ const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class DemoteCommand extends DiscordCommand {
   constructor(discord) {
-    super()
+    super(discord)
 
     this.name = 'demote'
     this.aliases = ['down', 'd']

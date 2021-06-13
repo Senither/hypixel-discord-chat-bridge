@@ -2,7 +2,7 @@ const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class InviteCommand extends DiscordCommand {
   constructor(discord) {
-    super()
+    super(discord)
 
     this.name = 'invite'
     this.aliases = ['i', 'inv']
