@@ -1,11 +1,12 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class KickCommand extends DiscordCommand {
-  constructor() {
+  constructor(discord) {
     super()
-    
+
     this.name = 'kick'
     this.aliases = ['k']
+    this.description = 'Kicks the given user from the guild'
   }
 
   onCommand(message) {

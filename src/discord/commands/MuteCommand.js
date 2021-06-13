@@ -1,11 +1,12 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class MuteCommand extends DiscordCommand {
-  constructor() {
+  constructor(discord) {
     super()
-    
+
     this.name = 'mute'
     this.aliases = ['m']
+    this.description = 'Mutes the given user for a given amount of time'
   }
 
   onCommand(message) {

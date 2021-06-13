@@ -1,11 +1,12 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class DemoteCommand extends DiscordCommand {
-  constructor() {
+  constructor(discord) {
     super()
-    
+
     this.name = 'demote'
     this.aliases = ['down', 'd']
+    this.description = 'Demotes the given user by one guild rank'
   }
 
   onCommand(message) {
