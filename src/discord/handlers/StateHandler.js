@@ -29,7 +29,7 @@ class StateHandler {
           color: 'F04947'
         }
       }).then(() => { process.exit() })
-    }).catch(process.exit())
+    }).catch(() => { process.exit() })
   }
 }
 
