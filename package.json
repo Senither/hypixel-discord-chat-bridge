@@ -1,6 +1,6 @@
 {
   "name": "hypixel-discord-chat-bridge",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A Hypixel guild chat and Discord chat bridge",
   "main": "index.js",
   "scripts": {
