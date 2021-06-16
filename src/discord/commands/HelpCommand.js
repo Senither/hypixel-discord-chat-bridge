@@ -1,5 +1,4 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
-const Discord = require('discord.js-light')
 
 const { version } = require('../../../package.json')
 
