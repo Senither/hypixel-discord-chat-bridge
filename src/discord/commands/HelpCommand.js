@@ -17,11 +17,11 @@ class HelpCommand extends DiscordCommand {
 
     this.discord.messageHandler.command.commands.forEach(command => {
       discordCommands.push(`\`${command.name}\`: ${command.description}`)
-    });
+    })
 
     this.discord.app.minecraft.chatHandler.command.commands.forEach(command => {
       minecraftCommands.push(`\`${command.name}\`: ${command.description}`)
-    });
+    })
 
     message.channel.send({
       embed: {
