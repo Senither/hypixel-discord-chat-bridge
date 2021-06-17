@@ -1,6 +1,14 @@
 const DiscordCommand = require('../../contracts/DiscordCommand')
 
 class RelogCommand extends DiscordCommand {
+  constructor(discord) {
+    super(discord)
+
+    this.name = 'relog'
+    this.aliases = ['r']
+    this.description = 'Relogs the minecraft client after a given period of time'
+  }
+
   onCommand(message) {
     let args = this.getArgs(message)
 
