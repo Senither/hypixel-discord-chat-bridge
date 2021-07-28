@@ -14,6 +14,9 @@ A two-way chat bridge between [Hypixel](https://hypixel.net/) guild chat and a [
 - [Installation using Docker](#installation-using-docker)
   - [Prerequisites](#prerequisites-1)
   - [Setup Guide](#setup-guide-1)
+- [Deploy directly to Replit](#deploy-directly-to-replit)
+  - [Prerequisites](#prerequisites-2)
+  - [Setup Guide](#setup-guide-2)
 - [Configuration](#configuration)
 - [Roadmap](#roadmap)
 
@@ -65,6 +68,20 @@ Next go into the `hypixel-discord-chat-bridge` folder and open the `docker-compo
     docker-compose up -d
 
 And you're done! The command will start a detached instance of the bot, and ensure that the container is deleted after you're done using it.
+
+## Deploy directly to Replit
+
+### Prerequisites
+
+You'll need a GitHub account to deploy directly to Replit, as well as a [Replit](https://replit.com/) account that is linked with your GitHub account, if you don't already have a [Replit](https://replit.com/) account you can simply sign in with your GitHub account directly.
+
+### Setup Guide
+
+1. First [fork this project](https://github.com/Senither/hypixel-skyblock-facade/fork) onto your own GitHub account, once you have a copy of the project on your own account, sign in to Replit and import the project into Replit.
+2. Now that the project is imported you should be able to click on the project in the Replit dashboard to create a new project from it, when the project has been created you should be able to select some settings about the project, make sure the selected language is set to `Node.js`, you can leave the _"configure the run button"_ settings as the default.
+3. Next, copy or rename the `config.example.json` file to `config.json`, you can find the files on the left-hand side of the Replit dashboard, when the file has been copied or renamed you should open the file and setup the settings, such as the Minecraft account details, and the Discord information
+4. Lastly you'll need to install all the dependencies for the project, this can be done by selecting the _"Shell"_ tab which should open the shell command prompt, then in that write `yarn install` to install all the dependencies.
+5. Now that the dependencies are installed you're now ready to start the project, just click on the big _"Run"_ button at the top of the screen, and wait for the project to be booted up, after the project is up and running you should see two messages in the Console tab indicating that both the Discord and Minecraft clients have connected and are ready to be used.
 
 ### Configuration
 
