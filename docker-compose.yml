@@ -11,6 +11,7 @@ services:
       SERVER_PORT: 25565
       MINECRAFT_USERNAME: yourUsername
       MINECRAFT_PASSWORD: yourPassword
+      MINECRAFT_LOBBY_HOLDER: lobbyHolder
       MINECRAFT_ACCOUNT_TYPE: mojang
       DISCORD_TOKEN: yourDiscordToken
       DISCORD_CHANNEL: discordChannelId
