@@ -13,9 +13,13 @@ class WeightCommand extends MinecraftCommand {
   async onCommand(username, message) {
     let args = message.split(' ')
     let ign = args[1]
+    let method = args[2]
 
     if (args.length == 1) {
-        ign = `${username}`
+      ign = username
+    }
+    if (TimeRanges.length == 2) {
+      method = `weight`
     }
 
     fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`)
@@ -52,12 +56,12 @@ async function getUUID(ign) {
   return result.id;
 }
 
-async function getApiData(ign) {
+async function getApiData(ign, method) {
   delete require.cache[require.resolve('../../../config.json')];
   const config = require('../../../config.json');
 
   const UUID = await getUUID(ign);
-  const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/save?key=${config.minecraft.apikey}`);
+  const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/${method}?key=${config.minecraft.apikey}`);
   return await response.json();
 }
 
