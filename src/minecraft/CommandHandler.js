@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { Collection } = require('discord.js-light')
+const { Collection } = require('discord.js')
 
 class CommandHandler {
   constructor(minecraft) {

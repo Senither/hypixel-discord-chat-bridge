@@ -13,10 +13,12 @@ class StateHandler {
 
     this.discord.client.channels.fetch(this.discord.app.config.discord.channel).then(channel => {
       channel.send({
-        embed: {
-          author: { name: `Chat Bridge is Online` },
-          color: '47F049'
-        }
+        embeds: [
+          {
+            author: { name: `Chat Bridge is Online` },
+            color: '47F049'
+          }
+        ]
       })
     })
   }
@@ -24,10 +26,12 @@ class StateHandler {
   onClose() {
     this.discord.client.channels.fetch(this.discord.app.config.discord.channel).then(channel => {
       channel.send({
-        embed: {
-          author: { name: `Chat Bridge is Offline` },
-          color: 'F04947'
-        }
+        embeds: [
+          {
+            author: { name: `Chat Bridge is Offline` },
+            color: 'F04947'
+          }
+        ]
       }).then(() => { process.exit() })
     }).catch(() => { process.exit() })
   }
@@ -39,10 +43,9 @@ async function getWebhook(discord) {
   if (webhooks.first()) {
     return webhooks.first()
   } else {
-    var res = await channel.createWebhook(discord.client.user.username, {
+    return await channel.createWebhook(discord.client.user.username, {
       avatar: discord.client.user.avatarURL(),
     })
-    return res
   }
 }
 

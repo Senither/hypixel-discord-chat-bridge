@@ -29,7 +29,7 @@ class MessageHandler {
     try {
       if (!message.reference) return null
 
-      const reference = await message.channel.messages.fetch(message.reference.messageID)
+      const reference = await message.channel.messages.fetch(message.reference.messageId)
 
       return reference.member ? reference.member.displayName : reference.author.username
     } catch (e) {

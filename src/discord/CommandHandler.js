@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { Collection } = require('discord.js-light')
+const { Collection } = require('discord.js')
 
 class CommandHandler {
   constructor(discord) {
@@ -32,10 +32,12 @@ class CommandHandler {
 
     if ((command.name != 'help' && !this.isCommander(message.member)) || (command.name == 'override' && !this.isOwner(message.author))) {
       return message.channel.send({
-        embed: {
-          description: `You don't have permission to do that.`,
-          color: 'DC143C'
-        }
+        embeds: [
+          {
+            description: `You don't have permission to do that.`,
+            color: 'DC143C'
+          }
+        ]
       })
     }
 

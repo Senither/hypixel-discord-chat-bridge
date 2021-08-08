@@ -24,36 +24,40 @@ class HelpCommand extends DiscordCommand {
     })
 
     message.channel.send({
-      embed: {
+      embeds: [
+        {
         title: 'Help',
         description: ['`< >` = Required arguments', '`[ ]` = Optional arguments'].join('\n'),
         fields: [
           {
-            name: 'Discord Commands',
-            value: discordCommands.join('\n')
+              name: 'Discord Commands',
+              value: discordCommands.join('\n')
+            },
+            {
+              name: 'Minecraft Commands',
+              value: minecraftCommands.join('\n')
+            },
+            {
+              name: `Info`,
+              value: [
+                `Prefix: \`${this.discord.app.config.discord.prefix}\``,
+                `Guild Channel: <#${this.discord.app.config.discord.channel}>`,
+                `Command Role: <@&${this.discord.app.config.discord.commandRole}>`,
+                `Version: \`${version}\``,
+              ].join('\n'),
+            }
+          ],
+          color: message.guild.me.displayHexColor,
+          footer: {
+            text: 'Made by Senither and neyoa ❤'
           },
-          {
-            name: 'Minecraft Commands',
-            value: minecraftCommands.join('\n')
-          },
-          {
-            name: `Info`,
-            value: [
-              `Prefix: \`${this.discord.app.config.discord.prefix}\``,
-              `Guild Channel: <#${this.discord.app.config.discord.channel}>`,
-              `Command Role: <@&${this.discord.app.config.discord.commandRole}>`,
-              `Version: \`${version}\``,
-            ].join('\n'),
-          }
-        ],
-        color: message.guild.me.displayHexColor,
-        footer: {
-          text: 'Made by Senither and neyoa ❤'
-        },
-        timestamp: new Date()
-      }
+          timestamp: new Date()
+        }
+      ]
     }).then(helpMessage => {
-      helpMessage.delete({ timeout: 30000 })
+      setTimeout(() => {
+        helpMessage.delete()
+      }, 30000)
     })
   }
 }

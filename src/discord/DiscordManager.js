@@ -2,7 +2,7 @@ const CommunicationBridge = require('../contracts/CommunicationBridge')
 const StateHandler = require('./handlers/StateHandler')
 const MessageHandler = require('./handlers/MessageHandler')
 const CommandHandler = require('./CommandHandler')
-const Discord = require('discord.js-light')
+const Discord = require('discord.js')
 
 class DiscordManager extends CommunicationBridge {
   constructor(app) {
@@ -16,16 +16,20 @@ class DiscordManager extends CommunicationBridge {
 
   connect() {
     this.client = new Discord.Client({
-      cacheGuilds: true,
-      cacheChannels: true,
-      cacheOverwrites: false,
-      cacheRoles: true,
-      cacheEmojis: false,
-      cachePresences: false,
+      intents: [
+        "GUILDS",
+        "GUILD_MESSAGES",
+        "GUILD_WEBHOOKS"
+      ],
+      allowedMentions: {
+        parse: [
+          "users"
+        ]
+      }
     })
 
     this.client.on('ready', () => this.stateHandler.onReady())
-    this.client.on('message', message => this.messageHandler.onMessage(message))
+    this.client.on('messageCreate', message => this.messageHandler.onMessage(message))
 
     this.client.login(this.app.config.discord.token).catch(error => {
       this.app.log.error(error)
@@ -42,27 +46,31 @@ class DiscordManager extends CommunicationBridge {
       case 'bot':
         this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
           channel.send({
-            embed: {
-              description: message,
-              color: '6495ED',
-              timestamp: new Date(),
-              footer: {
-                text: guildRank,
-              },
-              author: {
-                name: username,
-                icon_url: 'https://www.mc-heads.net/avatar/' + username,
-              },
-            },
+            embeds: [
+                {
+                description: message,
+                color: '6495ED',
+                timestamp: new Date(),
+                footer: {
+                  text: guildRank,
+                },
+                author: {
+                  name: username,
+                  icon_url: 'https://www.mc-heads.net/avatar/' + username,
+                },
+              }
+            ]
           })
         })
         break
 
       case 'webhook':
         message = message.replace(/@/g, '') // Stop pinging @everyone or @here
-        this.app.discord.webhook.send(
-          message, { username: username, avatarURL: 'https://www.mc-heads.net/avatar/' + username }
-        )
+        this.app.discord.webhook.send({
+          content: message,
+          username: username,
+          avatarURL: 'https://www.mc-heads.net/avatar/' + username
+        })
         break
 
       default:
@@ -75,10 +83,12 @@ class DiscordManager extends CommunicationBridge {
 
     this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
       channel.send({
-        embed: {
+        embeds: [
+          {
           color: color,
           description: message,
-        }
+          }
+        ]
       })
     })
   }
@@ -88,14 +98,16 @@ class DiscordManager extends CommunicationBridge {
 
     this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
       channel.send({
-        embed: {
-          color: color,
-          author: {
-            name: title,
-            icon_url: icon,
-          },
-          description: message,
-        }
+        embeds: [
+            {
+              color: color,
+              author: {
+                name: title,
+                icon_url: icon,
+              },
+              description: message,
+            }
+        ]
       })
     })
   }
@@ -107,24 +119,30 @@ class DiscordManager extends CommunicationBridge {
       case 'bot':
         this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
           channel.send({
-            embed: {
-              color: color,
-              timestamp: new Date(),
-              author: {
-                name: `${username} ${message}`,
-                icon_url: 'https://www.mc-heads.net/avatar/' + username,
-              },
-            }
+            embeds: [
+              {
+                color: color,
+                timestamp: new Date(),
+                author: {
+                  name: `${username} ${message}`,
+                  icon_url: 'https://www.mc-heads.net/avatar/' + username,
+                }
+              }
+            ]
           })
         })
         break
 
       case 'webhook':
         this.app.discord.webhook.send({
-          username: username, avatarURL: 'https://www.mc-heads.net/avatar/' + username, embeds: [{
-            color: color,
-            description: `${username} ${message}`,
-          }]
+          username: username,
+          avatarURL: 'https://www.mc-heads.net/avatar/' + username,
+          embeds: [
+            {
+              color: color,
+              description: `${username} ${message}`,
+            }
+          ]
         })
         break
 

@@ -21,4 +21,9 @@ class Application {
   }
 }
 
+process.on("unhandledRejection", error => {
+  new Logger()
+    .error(error)
+})
+
 module.exports = new Application()
