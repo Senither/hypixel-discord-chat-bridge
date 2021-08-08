@@ -1,5 +1,5 @@
 const MinecraftCommand = require('../../contracts/MinecraftCommand')
-const fetch = require('node-fetch')
+const fetch = require('node-fetch-cache')
 
 class WeightCommand extends MinecraftCommand {
   constructor(minecraft) {
@@ -13,15 +13,10 @@ class WeightCommand extends MinecraftCommand {
   async onCommand(username, message) {
     let args = message.split(' ')
     let ign = args[1]
-    let method = args[2]
 
     if (args.length == 1) {
       ign = username
     }
-    if (args.length == 2) {
-      method = `weight`
-    }
-
     fetch(`https://api.mojang.com/users/profiles/minecraft/${ign}`)
       .then(res => {
         if (res.status != 200) {
@@ -53,12 +48,12 @@ async function getUUID(ign) {
   return result.id;
 }
 
-async function getApiData(ign, method) {
+async function getApiData(ign) {
   delete require.cache[require.resolve('../../../config.json')];
   const config = require('../../../config.json');
 
   const UUID = await getUUID(ign);
-  const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/${method}?key=${config.minecraft.apikey}`);
+  const response = await fetch(`https://hypixel-api.senither.com/v1/profiles/${UUID}/weight?key=${config.minecraft.apikey}`);
   return await response.json();
 }
 
