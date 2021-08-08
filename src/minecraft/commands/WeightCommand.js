@@ -18,7 +18,7 @@ class WeightCommand extends MinecraftCommand {
     if (args.length == 1) {
       ign = username
     }
-    if (TimeRanges.length == 2) {
+    if (args.length == 2) {
       method = `weight`
     }
 
@@ -34,12 +34,9 @@ class WeightCommand extends MinecraftCommand {
     const apiData = await getApiData(ign);
 
     if (apiData.status != 200) {
-      this.send(`/gc ${apiData.reason}`)
+      console.log(`${apiData.reason}`)
+      this.send(`/gc Something went wrong!`)
     }
-
-    if (apiData.data.skills.apiEnabled == false) this.send(`/gc This user has skill API disabled`)
-
-    if (apiData.data.dungeons == null) this.send(`/gc ${ign} hasn't entered Dungeons`)
 
     this.send(`/gc ${ign} his weight for their ${apiData.data.name} profile is ${toFixed(apiData.data.weight)} + ${toFixed(apiData.data.weight_overflow)} Overflow ${toFixed(apiData.data.weight + apiData.data.weight_overflow)} Total`)
   }
