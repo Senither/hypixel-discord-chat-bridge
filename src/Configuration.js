@@ -11,6 +11,7 @@ class Configuration {
       password: null,
       lobbyHolder: null,
       accountType: 'mojang',
+      apikey: null,
     },
     discord: {
       token: null,
@@ -29,6 +30,7 @@ class Configuration {
     MINECRAFT_PASSWORD: val => (this.properties.minecraft.password = val),
     MINECRAFT_LOBBY_HOLDER: val => (this.properties.minecraft.lobbyHolder = val),
     MINECRAFT_ACCOUNT_TYPE: val => (this.properties.minecraft.accountType = val),
+    APIKEY: val => (this.properties.minecraft.apikey = val),
     DISCORD_TOKEN: val => (this.properties.discord.token = val),
     DISCORD_CHANNEL: val => (this.properties.discord.channel = val),
     DISCORD_COMMAND_ROLE: val => (this.properties.discord.commandRole = val),
