@@ -118,6 +118,14 @@ The messageMode can either be `bot` or `webhook`. This selects how the messages 
 
 > Note: The Discord rate limit for webhooks is 30 requests every 60 seconds, whereas for normal bot messages it's 5 messages every 5 seconds. Using webhooks effectively halves the number of messages the bot can send per minute which may cause issues in an active guild.
 
+#### Express
+
+The express section includes an option to enable/disable the express API option. If enabled, this will allow you to locally send requests to your bridge bot via other applications, and globally if you have port forwarding enabled.
+
+The `port` option allows you to set what port you want to host your API on. 
+
+The `authentication` option is the key which you can put in the header or query of your request. This allows security as only people with the authentication key will be able to successfully send requests to your API.
+
 ### Commands
 
 `< >` = Required arguments, `[ ]` Optional arguments
