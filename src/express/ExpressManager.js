@@ -12,6 +12,7 @@ class ExpressManager {
     }
     this.router.post("/kick", this.authenticate.bind(this), this.validateBody.bind(this), this.kick.bind(this))
     this.router.post("/mute", this.authenticate.bind(this), this.validateBody.bind(this), this.mute.bind(this))
+    this.router.post("/unmute", this.authenticate.bind(this), this.validateBody.bind(this), this.unMute.bind(this))
     this.router.post("/promote", this.authenticate.bind(this), this.validateBody.bind(this), this.promote.bind(this))
     this.router.post("/demote", this.authenticate.bind(this), this.validateBody.bind(this), this.demote.bind(this))
     this.router.post("/override", this.authenticate.bind(this), this.validateBody.bind(this), this.override.bind(this))
@@ -65,6 +66,14 @@ class ExpressManager {
           }
           next()
           break;
+        case "unmute":
+          if (this.missing(["username", "duration"], request.body)) {
+            return response.status(400).json({
+              success: false,
+              reason: "Malformed Body"
+            })
+          }
+          break;
         default:
           if (this.missing(["username"], request.body)) {
             return response.status(400).json({
@@ -117,6 +126,26 @@ class ExpressManager {
     try {
       if (this.app.minecraft.bot?.player) {
         this.app.minecraft.bot.chat(`/guild mute ${request.body.username}`)
+        return response.status(200).json({
+          success: true
+        })
+      }
+      return response.status(409).json({
+        success: false,
+        reason: "Minecraft client is unavailable at this time"
+      })
+    } catch (error) {
+      this.app.log.error(error)
+      return response.status(500).json({
+        success: false,
+        reason: "An internal server error occurred"
+      })
+    }
+  }
+  unMute(request, response) {
+    try {
+      if (this.app.minecraft.bot?.player) {
+        this.app.minecraft.bot.chat(`/guild unmute ${request.body.username}`)
         return response.status(200).json({
           success: true
         })
