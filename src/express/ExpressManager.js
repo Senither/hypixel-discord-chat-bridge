@@ -66,7 +66,7 @@ class ExpressManager {
           }
           next()
           break;
-        case "unmute":
+        case "mute":
           if (this.missing(["username", "duration"], request.body)) {
             return response.status(400).json({
               success: false,
