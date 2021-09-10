@@ -2,27 +2,26 @@ const express = require("express")
 
 class ExpressManager {
   constructor(app) {
-    this.app = app;
-    this.expressApp = express();
-    this.router = express.Router();
+    this.app = app
+    this.express = express()
+    this.router = express.Router()
   }
   initialize() {
     if (!this.app.config.express.enabled) {
       return this.app.log.express("Express disabled in configuration, skipping initialization.")
     }
-    this.router.post("/kick", this.authenticate.bind(this), this.validateBody.bind(this), this.kick.bind(this))
-    this.router.post("/mute", this.authenticate.bind(this), this.validateBody.bind(this), this.mute.bind(this))
-    this.router.post("/unmute", this.authenticate.bind(this), this.validateBody.bind(this), this.unMute.bind(this))
-    this.router.post("/promote", this.authenticate.bind(this), this.validateBody.bind(this), this.promote.bind(this))
-    this.router.post("/demote", this.authenticate.bind(this), this.validateBody.bind(this), this.demote.bind(this))
-    this.router.post("/override", this.authenticate.bind(this), this.validateBody.bind(this), this.override.bind(this))
-    this.router.post("/invite", this.authenticate.bind(this), this.validateBody.bind(this), this.invite.bind(this))
-    this.router.post("/setrank", this.authenticate.bind(this), this.validateBody.bind(this), this.setRank.bind(this))
-    this.expressApp.use(express.urlencoded({ extended: false }));
-    this.expressApp.use(express.json());
-    this.expressApp.use("/api", this.router)
-    this.expressApp.set('json spaces', 2)
-    this.expressApp.listen(this.app.config.express.port, () => {
+    this.router.post("/kick", this.kick.bind(this))
+    this.router.post("/mute", this.mute.bind(this))
+    this.router.post("/unmute", this.unMute.bind(this))
+    this.router.post("/promote", this.promote.bind(this))
+    this.router.post("/demote", this.demote.bind(this))
+    this.router.post("/override", this.override.bind(this))
+    this.router.post("/invite", this.invite.bind(this))
+    this.router.post("/setrank", this.setRank.bind(this))
+    this.express.use(express.json(), express.urlencoded({ extended: false }), this.authenticate.bind(this), this.validateBody.bind(this))
+    this.express.use("/api", this.router)
+    this.express.set('json spaces', 2)
+    this.express.listen(this.app.config.express.port, () => {
       this.app.log.express(`API online and is running on http://localhost:${this.app.config.express.port}/api/`)
     })
   }
@@ -46,7 +45,7 @@ class ExpressManager {
   }
   validateBody(request, response, next) {
     try {
-      const path = request.path.slice(1)
+      const path = request.path.slice(5)
       switch (path) {
         case "setrank":
           if (this.missing(["username", "rank"], request.body)) {
@@ -56,7 +55,7 @@ class ExpressManager {
             })
           }
           next()
-          break;
+          break
         case "override":
           if (this.missing(["message"], request.body)) {
             return response.status(400).json({
@@ -65,7 +64,7 @@ class ExpressManager {
             })
           }
           next()
-          break;
+          break
         case "mute":
           if (this.missing(["username", "duration"], request.body)) {
             return response.status(400).json({
@@ -73,7 +72,7 @@ class ExpressManager {
               reason: "Malformed Body"
             })
           }
-          break;
+          break
         default:
           if (this.missing(["username"], request.body)) {
             return response.status(400).json({
@@ -93,13 +92,13 @@ class ExpressManager {
   }
   missing(array, object) {
     try {
-      let missing = false;
+      let missing = false
       array.forEach(element => {
-        if (!object[element]) missing = true;
+        if (!object[element]) missing = true
       })
       return missing
     } catch (error) {
-      return true;
+      return true
     }
   }
   kick(request, response) {

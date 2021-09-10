@@ -23,7 +23,7 @@ class Configuration {
     express: {
       enabled: false,
       port: 8880,
-      "authorization": "authorizationHeaderString"
+      authorization: "authorizationHeaderString"
     }
   }
 
