@@ -9,6 +9,10 @@ class Logger {
     return console.log(chalk.bgGreenBright.black(`[${this.getCurrentTime()}] Minecraft >`) + ' ' + chalk.greenBright(message))
   }
 
+  express(message) {
+    return console.log(chalk.bgCyan.black(`[${this.getCurrentTime()}] Express >`) + ' ' + chalk.cyan(message))
+  }
+
   warn(message) {
     return console.log(chalk.bgYellow.black(`[${this.getCurrentTime()}] Warning >`) + ' ' + chalk.yellow(message))
   }
