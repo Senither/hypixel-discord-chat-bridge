@@ -1,7 +1,7 @@
 const Configuration = require('./Configuration')
 const DiscordManager = require('./discord/DiscordManager')
 const MinecraftManager = require('./minecraft/MinecraftManager')
-const ExpressManager = require("./express/ExpressManager")
+const ExpressManager = require('./express/ExpressManager')
 const Logger = require('./Logger')
 
 class Application {
