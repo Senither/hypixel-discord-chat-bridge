@@ -41,7 +41,7 @@ class MessageHandler {
     return message
       .replace(/<[@|#|!|&]{1,2}(\d+){16,}>/g, '\n')
       .replace(/<:\w+:(\d+){16,}>/g, '\n')
-      .replace(/[^\p{L}\p{N}\p{P}\p{Z}]/gu, '\n')
+      .replace(/[^\p{L}\p{N}\p{P}\p{Z}\+$\^\|~`<>]/gu, '\n')
       .split('\n')
       .map(part => {
         part = part.trim()
