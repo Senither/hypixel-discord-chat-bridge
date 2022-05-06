@@ -4,3 +4,5 @@ yarn-error.log
 config.json
 /.vscode
 .idea
+package-lock.json
+package.json

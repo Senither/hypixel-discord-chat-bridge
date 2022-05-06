@@ -1,0 +1,25 @@
+{
+    "server": {
+      "host": "mc.hypixel.net",
+      "port": 25565
+    },
+    "minecraft": {
+      "username": "literally_anything_here",
+      "lobbyHolder": "Not_Sure_About_This_One",
+      "accountType": "microsoft"
+    },
+    "discord": {
+      "token": "discordBotToken",
+      "channel": "channelId",
+      "commandRole": "roleId",
+      "ownerId": "userId",
+      "ownerRoles": ["ownerRoleId2", "ownerRoleId2"],
+      "prefix": "?",
+      "messageMode": "bot"
+    },
+    "express": {
+      "enabled": false,
+      "port": 8880,
+      "authorization": "authorizationHeaderString"
+    }
+  }  
