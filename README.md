@@ -35,9 +35,12 @@ To get started, clone down the repository using:
 
     git clone https://github.com/Senither/hypixel-discord-chat-bridge.git
 
-Next go into the `hypixel-discord-chat-bridge` folder and install all the dependencies using Yarn.
+Next go into the `hypixel-discord-chat-bridge` folder and install all the dependencies using npm.
 
-    yarn
+    npm install yarn.lock
+    npm uninstall mineflayer
+    npm install mineflayer
+    npm audit fix
 
 While the dependencies are being installed you can copy the configuration file.
 
