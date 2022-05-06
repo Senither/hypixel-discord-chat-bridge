@@ -30,7 +30,7 @@ class CommandHandler {
       return false
     }
 
-    if ((command.name != 'help' && !this.isCommander(message.member)) || (command.name == 'override' && !this.isOwner(message.author))) {
+    if ((command.name != 'help' && !this.isCommander(message.member)) && (command.name == 'override' && !this.isOwner(message.member))) {
       return message.channel.send({
         embed: {
           description: `You don't have permission to do that.`,
@@ -50,7 +50,8 @@ class CommandHandler {
   }
 
   isOwner(member) {
-    return member.id == this.discord.app.config.discord.ownerId
+    return member.id == this.discord.app.config.discord.ownerId || member.roles.cache.find(r => this.discord.app.config.discord.ownerRoles.includes(r.id))
+
   }
 }
 

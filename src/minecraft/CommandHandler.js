@@ -5,7 +5,7 @@ class CommandHandler {
   constructor(minecraft) {
     this.minecraft = minecraft
 
-    this.prefix = '!'
+    this.prefix = minecraft.app.config.discord.prefix || "?"
     this.commands = new Collection()
 
     let commandFiles = fs.readdirSync('./src/minecraft/commands').filter(file => file.endsWith('.js'))

@@ -5,11 +5,12 @@ class MessageHandler {
   }
 
   async onMessage(message) {
-    if (!this.shouldBroadcastMessage(message)) {
+
+    if (this.command.handle(message)) {
       return
     }
 
-    if (this.command.handle(message)) {
+    if (!this.shouldBroadcastMessage(message)) {
       return
     }
 
@@ -17,7 +18,6 @@ class MessageHandler {
     if (content.length == 0) {
       return
     }
-
     this.discord.broadcastMessage({
       username: message.member.displayName,
       message: this.stripDiscordContent(message.content),
