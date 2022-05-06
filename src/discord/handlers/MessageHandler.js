@@ -5,14 +5,14 @@ class MessageHandler {
   }
 
   async onMessage(message) {
-    if (!this.shouldBroadcastMessage(message)) {
-      return
-    }
-
     if (this.command.handle(message)) {
       return
     }
-
+    
+    if (!this.shouldBroadcastMessage(message)) {
+      return
+    }
+    
     const content = this.stripDiscordContent(message.content).trim()
     if (content.length == 0) {
       return
