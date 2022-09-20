@@ -61,7 +61,7 @@ _Older versions may also work, but have not been tested._
 
 To get started, clone down the repository using:
 
-    git clone https://github.com/Senither/hypixel-discord-chat-bridge.git
+    git clone https://github.com/itsneyoa/hypixel-discord-chat-bridge.git
 
 Next go into the `hypixel-discord-chat-bridge` folder and open the `docker-compose.yml` file, within the file you'll find all the environment variables that can be used to setup the bot, you should fill replace the default values with your real Discord and Minecraft login info, once you're done you can start the bot using Docker.
 
