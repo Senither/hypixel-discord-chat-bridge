@@ -97,7 +97,7 @@ The minecraft section includes a `username` and `password` option, if using a Mo
 
 #### Discord
 
-The Discord options includes the `token`, `channel`, `commandRole`, `ownerId`, `prefix` and `messageMode` options.
+The Discord options includes the `token`, `channel`, `commandRole`, `ownerId`, `prefix`, `messageMode`, `doOfficer` and `officer` options.
 
 The token is the Discord application token, if you don't already have a Discord App, you can [create a new app](https://discordapp.com/developers), then convert the app to a Discord bot, and then get your Discord bot token on the "Bot" page.
 
@@ -112,6 +112,10 @@ The owner ID is similar to the command role, however this is the ID of the user 
 The prefix is the command prefixed used for all the commands in the bot on the Discord side, by default this is set it `!`.
 
 The messageMode can either be `bot` or `webhook`. This selects how the messages should be displayed when sent from Minecraft to Discord. If webhook mode is selected the bot requires the `Manage Webhooks` permission in the channel it's running in. The bot always requires the `Send Messages` and `View Channel` permissions in the channel you're using it in.
+
+The doOfficer flag enables / disables officer chat. Disabled by default. If enabled, a valid officer text channel must be given
+
+The officer field is the ID of the officer channel you want to link the bot with
 
 - [View Webhook example](https://i.imgur.com/tulcMVA.png)
 - [View Bot Mode example](https://i.imgur.com/L8XhcNn.png)
@@ -146,7 +150,7 @@ The `authentication` option is the key which you can put in the header or query 
   - Guild joins/leaves/kicks, mutes/unmutes and promotion/demotions
 - [ ] Ingame commands
   - Add commands for players to use ingame to check other player stats (eg `!skills <ign>`, `!weight <ign>` etc)
-- [ ] Add support for officer chat
+- [x] Add support for officer chat
   - Allocate a second discord channel to use for two way officer chat.
 
 ## License

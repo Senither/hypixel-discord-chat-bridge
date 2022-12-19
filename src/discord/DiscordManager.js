@@ -36,11 +36,14 @@ class DiscordManager extends CommunicationBridge {
     process.on('SIGINT', () => this.stateHandler.onClose())
   }
 
-  onBroadcast({ username, message, guildRank }) {
-    this.app.log.broadcast(`${username} [${guildRank}]: ${message}`, `Discord`)
+  onBroadcast({ username, message, guildRank, isOfficer }) {
+    this.app.log.broadcast(`${username} [${guildRank}]: ${message}`, `Discord ` + isOfficer ? 'Officer' : 'Guild')
     switch (this.app.config.discord.messageMode.toLowerCase()) {
       case 'bot':
-        this.app.discord.client.channels.fetch(this.app.config.discord.channel).then(channel => {
+
+        this.app.discord.client.channels
+          .fetch(isOfficer ? this.app.config.discord.officer : this.app.config.discord.channel)
+          .then(channel => {
           channel.send({
             embed: {
               description: message,
@@ -60,7 +63,10 @@ class DiscordManager extends CommunicationBridge {
 
       case 'webhook':
         message = message.replace(/@/g, '') // Stop pinging @everyone or @here
-        this.app.discord.webhook.send(
+
+        let webhook = isOfficer ? this.app.discord.officerWebhook : this.app.discord.webhook
+
+        webhook.send(
           message, { username: username, avatarURL: 'https://www.mc-heads.net/avatar/' + username }
         )
         break

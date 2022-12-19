@@ -5,10 +5,14 @@ class StateHandler {
 
   async onReady() {
     this.discord.app.log.discord('Client ready, logged in as ' + this.discord.client.user.tag)
-    this.discord.client.user.setActivity('Guild Chat', { type: 'WATCHING' })
+    await this.discord.client.user.setActivity('Guild Chat', { type: 'WATCHING' })
 
-    if (this.discord.app.config.discord.messageMode == 'webhook') {
+    if (this.discord.app.config.discord.messageMode === 'webhook') {
       this.discord.webhook = await getWebhook(this.discord)
+
+      if (this.discord.app.config.discord.doOfficer) {
+        this.discord.officerWebhook = await getOfficerWebhook(this.discord)
+      }
     }
 
     this.discord.client.channels.fetch(this.discord.app.config.discord.channel).then(channel => {
@@ -39,10 +43,21 @@ async function getWebhook(discord) {
   if (webhooks.first()) {
     return webhooks.first()
   } else {
-    var res = await channel.createWebhook(discord.client.user.username, {
+    return await channel.createWebhook(discord.client.user.username, {
       avatar: discord.client.user.avatarURL(),
     })
-    return res
+  }
+}
+
+async function getOfficerWebhook(discord) {
+  let channel = discord.client.channels.cache.get(discord.app.config.discord.officer)
+  let webhooks = await channel.fetchWebhooks()
+  if (webhooks.first()) {
+    return webhooks.first()
+  }else {
+    return await channel.createWebhook(discord.client.user.username, {
+      avatar: discord.client.user.avatarURL(),
+    })
   }
 }
 

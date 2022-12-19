@@ -14,7 +14,7 @@ class MessageHandler {
     }
 
     const content = this.stripDiscordContent(message.content).trim()
-    if (content.length == 0) {
+    if (content.length === 0) {
       return
     }
 
@@ -22,6 +22,7 @@ class MessageHandler {
       username: message.member.displayName,
       message: this.stripDiscordContent(message.content),
       replyingTo: await this.fetchReply(message),
+      isOfficer: this.discord.app.config.discord.doOfficer ? message.channel.id === this.discord.app.config.discord.officer : false
     })
   }
 
@@ -46,13 +47,18 @@ class MessageHandler {
       .map(part => {
         part = part.trim()
 
-        return part.length == 0 ? '' : part + ' '
+        return part.length === 0 ? '' : part + ' '
       })
       .join('')
   }
 
   shouldBroadcastMessage(message) {
-    return !message.author.bot && message.channel.id == this.discord.app.config.discord.channel && message.content && message.content.length > 0
+    return !message.author.bot
+      && (message.channel.id === this.discord.app.config.discord.channel
+        || (message.channel.id === this.discord.app.config.discord.officer
+          && this.discord.app.config.discord.doOfficer))
+      && message.content
+      && message.content.length > 0
   }
 }
 
